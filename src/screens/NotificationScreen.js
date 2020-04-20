@@ -1,20 +1,20 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 
-const DashboardScreen = ({ navigation }) => {
+const NotificationScreen = () => {
     return (
         <View style={styles.container}>
             <Image 
                 style={styles.logo}
                 source={require('../../assets/logo.png')}
             />
-            <Text style={styles.text}>Dashboard</Text>
+            <Text style={styles.text}>Notifications</Text>
         </View>
     );
 };
 
-DashboardScreen.navigationOptions = {
-    title: 'Dashboard',
+NotificationScreen.navigationOptions = {
+    title: 'Notifications',
 };
 
 const styles = StyleSheet.create({
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DashboardScreen;
+export default NotificationScreen;
