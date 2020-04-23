@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import DrawerButton from '../components/DrawerButton';
+import ChatButton from '../components/ChatButton';
 
-const DashboardScreen = ({ navigation }) => {
+const DashboardScreen = () => {
     return (
         <View style={styles.container}>
             <Image 
@@ -11,11 +14,27 @@ const DashboardScreen = ({ navigation }) => {
             <Text style={styles.text}>Dashboard</Text>
         </View>
     );
-};
+}
 
-DashboardScreen.navigationOptions = {
-    title: 'Dashboard',
-};
+const DashboardStack = createStackNavigator({
+    Dashboard: DashboardScreen,
+},{
+    defaultNavigationOptions:({navigation}) => {
+        return {
+            title: 'Dashboard',
+            headerLeft: () => <DrawerButton />,
+            headerRight: () => <ChatButton />,
+            headerStyle: {
+                backgroundColor: 'darkslategrey'
+            },
+            headerTitleStyle: {
+                fontWeight: "bold",
+                color: "yellow",
+            },
+            headerTitleAlign: 'center'
+        }
+    }
+});
 
 const styles = StyleSheet.create({
     container: {
@@ -36,4 +55,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DashboardScreen;
+export default DashboardStack;

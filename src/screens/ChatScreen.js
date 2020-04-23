@@ -1,26 +1,30 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import DrawerButton from '../components/DrawerButton';
+import BackButton from '../components/BackButton';
 
-const InternshipScreen = () => {
-    return (
+class ChatScreen extends React.Component {
+    static navigationOptions = {
+    };
+    render() {
+      return (
         <View style={styles.container}>
             <Image 
                 style={styles.logo}
                 source={require('../../assets/logo.png')}
             />
-            <Text style={styles.text}>Internships</Text>
+            <Text style={styles.text}>Chat Screen</Text>
         </View>
-    );
-};
+      );
+    }
+}
 
-const InternshipStack = createStackNavigator({
-    Internship: InternshipScreen
+const ChatStack = createStackNavigator({
+    Chat: ChatScreen
 },{
     defaultNavigationOptions: {
-      title: 'Interships',
-      headerLeft: () => <DrawerButton />,
+      title: 'Chat',
+      headerLeft: () => <BackButton/>,
       headerStyle: {
         backgroundColor: 'darkslategrey'
       },
@@ -29,15 +33,15 @@ const InternshipStack = createStackNavigator({
         color: "yellow",
       },
       headerTitleAlign: 'center'
-    }
+    },
 });
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        marginBottom: 200
-    }, 
+      flex: 1,
+      justifyContent: 'center',
+      marginBottom: 200
+    },
     logo: {
         alignSelf: 'center',
         width: 125,
@@ -50,5 +54,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
     },
 });
+  
 
-export default InternshipStack;
+export default ChatStack;

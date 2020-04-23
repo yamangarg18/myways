@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import DrawerButton from '../components/DrawerButton';
 
 const NotificationScreen = () => {
     return (
@@ -13,9 +15,22 @@ const NotificationScreen = () => {
     );
 };
 
-NotificationScreen.navigationOptions = {
-    title: 'Notifications',
-};
+const NotificationStack = createStackNavigator({
+    Notification: NotificationScreen
+},{
+    defaultNavigationOptions: {
+      title: 'Notifications',
+      headerLeft: () => <DrawerButton />,
+      headerStyle: {
+        backgroundColor: 'darkslategrey'
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        color: "yellow",
+      },
+      headerTitleAlign: 'center'
+    }
+});
 
 const styles = StyleSheet.create({
     container: {
@@ -36,4 +51,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NotificationScreen;
+export default NotificationStack;

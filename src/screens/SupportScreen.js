@@ -1,10 +1,61 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import BackButton from '../components/BackButton';
 
-const SupportScreen = () => {
-    return <Text style={{ fontSize: 48 }}>SupportScreen</Text>;
-};
+class SupportScreen extends React.Component {
+   
+    static navigationOptions = {
+      // drawerLabel: 'Support  '
+    }
+  
+    render() {
+      return (
+        <View style={styles.container}>
+            <Image 
+                style={styles.logo}
+                source={require('../../assets/logo.png')}
+            />
+            <Text style={styles.text}>Support</Text>
+        </View>
+      );
+    }
+}
 
-const styles = StyleSheet.create({});
+const SupportStack = createStackNavigator({
+   Support:SupportScreen
+},{
+    defaultNavigationOptions: {
+      title: 'Support',
+      headerLeft: () => <BackButton/>,
+      headerStyle: {
+        backgroundColor: 'darkslategrey'
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        color: "yellow",
+      },
+      headerTitleAlign: 'center'
+    },
+});
 
-export default SupportScreen;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        marginBottom: 200
+    },
+    logo: {
+        alignSelf: 'center',
+        width: 125,
+        height: 120,
+        marginBottom: 5,
+    },
+    text: {
+        color: 'black',
+        textAlign: 'center',
+        fontSize: 30,
+    },
+});
+
+export default SupportStack;
