@@ -1,24 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import BackButton from '../components/BackButton';
 
-class SettingsScreen extends React.Component {
-    static navigationOptions = {
-      // drawerLabel: 'Settings ',
-    };
-  
-    render() {
-      return (
-        <View style={styles.container}>
-            <Image 
-                style={styles.logo}
-                source={require('../../assets/logo.png')}
-            />
-            <Text style={styles.text}>Settings</Text>
-        </View>
-      );
-    }
+const SettingsScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+        <Image 
+            style={styles.logo}
+            source={require('../../assets/favicon.png')}
+        />
+        <Text style={styles.text}>Settings</Text>
+        <Button
+          title='Sign Out' 
+          onPress = {() => navigation.navigate('loginFlow')}
+        />
+    </View>
+  );
 }
 
 const SettingsStack = createStackNavigator({

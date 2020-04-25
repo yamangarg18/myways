@@ -5,14 +5,13 @@ import BackButton from '../components/BackButton';
 
 class UserProfileScreen extends React.Component {
     static navigationOptions = {
-      // drawerLabel: ' User Profile '
-    };
+        };
     render() {
       return (
         <View style={styles.container}>
             <Image 
                 style={styles.logo}
-                source={require('../../assets/logo.png')}
+                source={require('../../assets/favicon.png')}
             />
             <Text style={styles.text}>User Profile</Text>
         </View>

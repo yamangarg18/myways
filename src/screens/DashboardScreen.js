@@ -9,7 +9,7 @@ const DashboardScreen = () => {
         <View style={styles.container}>
             <Image 
                 style={styles.logo}
-                source={require('../../assets/logo.png')}
+                source={require('../../assets/favicon.png')}
             />
             <Text style={styles.text}>Dashboard</Text>
         </View>

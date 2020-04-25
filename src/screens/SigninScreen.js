@@ -13,24 +13,24 @@ const SigninScreen = ({ navigation }) => {
                 style={styles.logo}
                 source={require('../../assets/logo.png')}
             />
-            <View  style={styles.backgroundStyle}>
+            <View  style={styles.background}>
                 <MaterialIcons 
                     name='email'
-                    style={styles.iconStyle}
+                    style={styles.icon}
                 />
                 <TextInput 
                     placeholder='Email Address' 
-                    style={styles.inputStyle}
+                    style={styles.input}
                 />
             </View>
-            <View  style={styles.backgroundStyle}>
+            <View  style={styles.background}>
                 <FontAwesome 
                     name='lock' 
-                    style={styles.iconStyle}
+                    style={styles.icon}
                 />
                 <TextInput 
                     placeholder='Password'
-                    style={styles.inputStyle}
+                    style={styles.input}
                 />
             </View>
             <Spacer>
@@ -41,7 +41,7 @@ const SigninScreen = ({ navigation }) => {
             </Spacer>
             <NavLink
                 routeName='Signup'
-                text='Dont have an account? Sign up instead'
+                text='Dont have an account yet? Register'
             />
         </View>
 
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         height: 120,
         marginBottom: 5,
     },
-    backgroundStyle: {
+    background: {
         backgroundColor: '#F0EEEE',
         height: 50,
         borderRadius: 5,
@@ -76,11 +76,11 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
     },
-    inputStyle: {
+    input: {
         flex: 1,
         fontSize: 18,
     },
-    iconStyle: {
+    icon: {
         fontSize: 35,
         alignSelf: 'center',
         marginHorizontal: 15,

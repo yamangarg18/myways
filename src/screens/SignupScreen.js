@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Image } from 'react-native';
-import { Text, Button } from 'react-native-elements';
+import React from 'react';
+import { View, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import { Ionicons, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import NavLink from '../components/NavLink';
@@ -10,80 +10,87 @@ const SignupScreen = ({ navigation }) => {
         <View style={styles.container}>
             <Image 
                 style={styles.logo}
-                source={require('../../assets/logo.png')}
+                source={require('../../assets/favicon.png')}
             />
-            <View  style={styles.backgroundStyle}>
+            <View  style={styles.background}>
                 <Ionicons 
                     name='md-person'
-                    style={styles.iconStyle}
+                    style={styles.icon}
                 />
                 <TextInput 
                     placeholder='Name'
-                    style={styles.inputStyle} 
+                    style={styles.input} 
                 />
             </View>
-            <View  style={styles.backgroundStyle}>
+            <View  style={styles.background}>
                 <MaterialIcons 
                     name='email'
-                    style={styles.iconStyle}
+                    style={styles.icon}
                 />
                 <TextInput 
                     placeholder='Email Address' 
-                    style={styles.inputStyle}
+                    style={styles.input}
                 />
             </View>
-            <View  style={styles.backgroundStyle}>
+            <View  style={styles.background}>
                 <Entypo 
                     name='phone' 
-                    style={styles.iconStyle}
+                    style={styles.icon}
                 />
                 <TextInput 
                     placeholder='Phone' 
-                    style={styles.inputStyle}
+                    style={styles.input}
                 />
             </View>
-            <View  style={styles.backgroundStyle}>
+            <View  style={styles.background}>
                 <FontAwesome 
                     name='lock' 
-                    style={styles.iconStyle}
+                    style={styles.icon}
                 />
                 <TextInput 
                     placeholder='Password'
-                    style={styles.inputStyle}
+                    style={styles.input}
                 />
             </View>
-            <View  style={styles.backgroundStyle}>
+            <View  style={styles.background}>
                 <FontAwesome 
                     name='lock' 
-                    style={styles.iconStyle}
+                    style={styles.icon}
                 />
                 <TextInput 
                     placeholder='Confirm Password' 
-                    style={styles.inputStyle}
+                    style={styles.input}
                 />
             </View>
             <Spacer>
                 <Text h4>If any:</Text>
             </Spacer>
-            <View style={styles.backgroundStyle}>
+            <View style={styles.background}>
                 <FontAwesome 
                     name='lock' 
-                    style={styles.iconStyle}
+                    style={styles.icon}
                 />
                 <TextInput 
                     placeholder='College Access ID'
-                    style={styles.inputStyle} 
+                    style={styles.input} 
                 />
             </View>
             <Spacer>
-                <Button 
-                    title='Register' 
+                <TouchableOpacity
+                    style={styles.button}
                     onPress={() => navigation.navigate('mainFlow')}
-                />
+                >
+                    <Text 
+                        style={styles.buttonText}
+                        size={30}
+                    >
+                        Register as a Student
+                    </Text>
+                </TouchableOpacity>
             </Spacer>
             <NavLink
                 routeName='Signin'
-                text='Already have an account? Sign in instead'
+                text='Already have an account? Sign In'
             />
 
         </View>
@@ -100,6 +107,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: '#6a8d7b'
     }, 
     logo: {
         alignSelf: 'center',
@@ -107,24 +115,37 @@ const styles = StyleSheet.create({
         height: 120,
         marginBottom: 5,
     },
-    backgroundStyle: {
+    background: {
         backgroundColor: '#F0EEEE',
-        height: 50,
-        borderRadius: 5,
+        height: 30,
+        width: 300,
+        borderRadius: 15,
         marginHorizontal: 15,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 5,
-        marginBottom: 5,
+        marginVertical: 10,
+        alignSelf: 'center',
     },
-    inputStyle: {
+    input: {
         flex: 1,
         fontSize: 18,
     },
-    iconStyle: {
-        fontSize: 35,
+    icon: {
+        fontSize: 25,
         alignSelf: 'center',
         marginHorizontal: 15,
+    },
+    button: {
+        backgroundColor: 'yellow',
+        borderRadius: 25,
+        alignItems: 'center',
+        height: 50,
+        width: 150,
+        padding: 13,
+        alignSelf: 'center',
+    },
+    buttonText: {
+        color: '#2f4f4f',
     }
 });
 

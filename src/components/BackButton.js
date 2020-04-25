@@ -16,6 +16,7 @@ class BackButton extends Component {
       <Ionicons
          name= 'ios-arrow-back'
          size={20}
+         color= 'yellow'
       />
      </TouchableOpacity>
    );

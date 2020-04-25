@@ -1,59 +1,36 @@
-,{
-  defaultNavigationOptions:({ navigation }) => {
-    return {
-      tabBarIcon: ({tintColor}) => {
-        const { routeName } = navigation.state;
-        let myicon
-        if (routeName=='Dashboard') {
-          myicon = 'home'
-        }else if (routeName=='CareerInsight') {
-          myicon = 'info'
-        }else if (routeName=='Internship') {
-          myicon = 'th-list'
-        }else if (routeName=='Courses') {
-          myicon = 'laptop'
-        }else if (routeName=='Notification') {
-          myicon = 'sticky-note'
-        }
 
-        return <FontAwesome name={myicon} size={30} color={tintColor} />
-      },
-      contentOptions:{
-        activeTintColor: 'yellow',
-        inactiveTintColor: 'grey',
-        activeBackgroundColor: 'darkslategrey',
-        inactiveBackgroundColor: 'white'
-      },
-    }
-  }
-}
+// class CP1Screen extends React.Component {
+//     static navigationOptions = {
+//     };
+  
+//     render() {
+//       return (
+//         <View style={styles.container}>
+//             <Image 
+//                 style={styles.logo}
+//                 source={require('../../assets/favicon.png')}
+//             />
+//             <Text 
+//                 style={styles.text}
+//             > In this section, you will be asked different questions which help us personalize your experience further
+//             </Text>
+//         </View>
+//       );
+//     }
+// }
 
-,{
-  defaultNavigationOptions:({ navigation }) => {
-    return {
-      // tabBarIcon: ({tintColor}) => {
-      //   const { routeName } = navigation.state;
-      //   let myicon
-      //   if (routeName=='Dashboard') {
-      //     myicon = 'home'
-      //   }else if (routeName=='CareerInsight') {
-      //     myicon = 'info'
-      //   }else if (routeName=='Internship') {
-      //     myicon = 'th-list'
-      //   }else if (routeName=='Courses') {
-      //     myicon = 'laptop'
-      //   }else if (routeName=='Notification') {
-      //     myicon = 'sticky-note'
-      //   }
-
-      //   return <FontAwesome name={myicon} size={30} color={tintColor} />
-      // },
-      drawerContentOptions:{
-        activeTintColor: 'yellow',
-        inactiveTintColor: 'grey',
-        activeBackgroundColor: 'darkslategrey',
-        inactiveBackgroundColor: 'white'
-      },
-    }
-  }
-}
+// const CareerProfileStack = createStackNavigator({
+//     CareerProfile: CareerProfileScreen
+// },{
+//     defaultNavigationOptions: {
+//       title: 'Career Profile',
+//       headerStyle: {
+//         backgroundColor: 'darkslategrey'
+//       },
+//       headerTitleStyle: {
+//         fontWeight: "bold",
+//         color: "yellow",
+//       },
+//       headerTitleAlign: 'center'
+//     },
+// });
