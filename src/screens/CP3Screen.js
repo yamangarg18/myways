@@ -21,7 +21,7 @@ const CP3Screen = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate("CP4")}>
           <View style={styles.navigationView}>
             <Text style={styles.navigationText}>Next</Text>
-            <AntDesign style={styles.navigationIcon} name='careright' />
+            <AntDesign style={styles.navigationIcon} name='caretright' />
           </View>
         </TouchableOpacity>
       </View>

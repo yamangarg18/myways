@@ -1,5 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import TestScreen from "./TestScreen";
 import { AntDesign } from "@expo/vector-icons";
