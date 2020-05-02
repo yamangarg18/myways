@@ -29,7 +29,7 @@ const SkillSet = (props) => {
   const right = useRef(null);
   const left = useRef(null);
   const submit = useRef(null);
-
+  /*-------------------------------------------------------------------------------To get the status of the test*/
   useEffect(() => {
     const getTestsStatus = async () => {
       try {
@@ -51,7 +51,7 @@ const SkillSet = (props) => {
     };
     getTestsStatus();
   }, []);
-
+  /*-----------------------------------------------------------------------------Not useful------------------*/
   useEffect(() => {
     if (key === "ArrowRight") {
       if (right.current !== null) {
@@ -66,7 +66,7 @@ const SkillSet = (props) => {
       }
     }
   }, [key]);
-
+  /*---------------------------------------------------------------------------------No clue--------------*/
   useEventListener(
     "keydown", // event to listen to
     (event) => setKey(event.key)
@@ -287,7 +287,7 @@ const SkillSet = (props) => {
             <FontAwesomeIcon icon={faArrowLeft} />
           </Link>
           <Progress completed={progress} color={"#FFC765"} />
-          <div title='elapsed time' className='test-timer'>
+          <div>
             <Timer />
           </div>
           <div className='test__item'>

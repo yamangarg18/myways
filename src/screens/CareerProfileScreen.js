@@ -3,8 +3,6 @@ import { View, StyleSheet, Text, Image, Button, FlatList } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import BackButton from "../components/BackButton";
 import CP1Screen from "./CP1Screen";
-import CP2Screen from "./CP2Screen";
-import CP3Screen from "./CP3Screen";
 import CP4Stack from "./CP4Screen";
 import axios from "axios";
 import { Icon } from "react-native-elements";
@@ -42,32 +40,32 @@ const CareerProfileScreen = ({ navigation }) => {
     },
   ]);
 
-  const [dataFetched, setDataFetched] = useState(false);
+  // const [dataFetched, setDataFetched] = useState(false);
 
-  useEffect(() => {
-    const getTestsStatus = async () => {
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/api/user/getTestsStatus`
-        );
-        let newTestsStatus = [...testsStatus];
-        newTestsStatus = newTestsStatus.map((test) => {
-          test.isCompleted = data.response[test.field].status ? true : false;
-          return test;
-        });
+  // useEffect(() => {
+  //   const getTestsStatus = async () => {
+  //     try {
+  //       const { data } = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/api/user/getTestsStatus`
+  //       );
+  //       let newTestsStatus = [...testsStatus];
+  //       newTestsStatus = newTestsStatus.map((test) => {
+  //         test.isCompleted = data.response[test.field].status ? true : false;
+  //         return test;
+  //       });
 
-        setDataFetched(true);
-        setTestsStatus(newTestsStatus);
-      } catch (error) {
-        if (error.response === undefined) {
-          console.log(error.message);
-        } else {
-          console.log(error.response.data.message);
-        }
-      }
-    };
-    if (!dataFetched) getTestsStatus();
-  }, [testsStatus, dataFetched]);
+  //       setDataFetched(true);
+  //       setTestsStatus(newTestsStatus);
+  //     } catch (error) {
+  //       if (error.response === undefined) {
+  //         console.log(error.message);
+  //       } else {
+  //         console.log(error.response.data.message);
+  //       }
+  //     }
+  //   };
+  //   if (!dataFetched) getTestsStatus();
+  // }, [testsStatus, dataFetched]);
 
   const renderTestsStatus = (testsStatus) => {
     return (
@@ -96,15 +94,15 @@ const CareerProfileScreen = ({ navigation }) => {
 
   const startTest = (testsStatus) => {
     if (!testsStatus[0].isCompleted) {
-      this.navigation.push(`${testsStatus[0].link}`);
+      navigation.navigate("CP1", { id: testsStatus[0].testName });
     } else if (!testsStatus[1].isCompleted) {
-      history.push(`${testsStatus[1].link}`);
+      navigation.navigate("CP1", { id: testsStatus[1].testName });
     } else if (!testsStatus[2].isCompleted) {
-      history.push(`${testsStatus[2].link}`);
+      navigation.navigate("CP1", { id: testsStatus[2].testName });
     } else if (!testsStatus[3].isCompleted) {
-      history.push(`${testsStatus[3].link}`);
+      navigation.navigate("CP1", { id: testsStatus[3].testName });
     } else {
-      history.push("/internships/careerOptions");
+      navigation.navigate("CareerInsight");
     }
   };
 
@@ -127,7 +125,7 @@ const CareerProfileScreen = ({ navigation }) => {
       <Text style={styles.text}>Career Profile</Text>
       <Button
         title={pageVisit(testsStatus)}
-        onPress={() => startTest(this.testsStatus)}
+        onPress={() => startTest(testsStatus)}
       />
       <View>{renderTestsStatus(testsStatus)}</View>
     </View>
@@ -138,8 +136,6 @@ const CareerProfileStack = createStackNavigator(
   {
     CareerProfile: CareerProfileScreen,
     CP1: CP1Screen,
-    CP2: CP2Screen,
-    CP3: CP3Screen,
     CP4: {
       screen: CP4Stack,
       navigationOptions: {

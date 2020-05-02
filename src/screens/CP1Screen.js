@@ -10,6 +10,15 @@ const CP1Screen = ({ navigation }) => {
         In this section, you will be asked different questions which help us
         personalize your experience further.
       </Text>
+      <Text style={styles.text}>
+        Please note that we do not share any of the responses you give in this
+        section with the employers.
+      </Text>
+      <Text style={styles.text}>
+        This section is completely to analyse you for better career planning and
+        this section directly impacts the Career Insights Section and all your
+        recommendations.
+      </Text>
       <View style={styles.navigationContainer}>
         <TouchableOpacity onPress={() => navigation.navigate("CareerProfile")}>
           <View style={styles.navigationView}>
@@ -17,7 +26,11 @@ const CP1Screen = ({ navigation }) => {
             <Text style={styles.navigationText}>Previous</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("CP2")}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("CP4", { id: navigation.state.params.id })
+          }
+        >
           <View style={styles.navigationView}>
             <Text style={styles.navigationText}>Next</Text>
             <AntDesign style={styles.navigationIcon} name='caretright' />

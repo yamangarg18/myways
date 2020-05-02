@@ -30,6 +30,7 @@ const AnalysisPage = (props) => {
       );
     }
   };
+
   const renderTest = (testName) => {
     switch (testName) {
       case "skill_set":
