@@ -11,9 +11,9 @@ const blogReducer = (state, action) => {
     }
 };
 
-const getBlogPosts = dispatch => {
+const getTests = dispatch => {
     return async () => {
-        const response = await jsonServer.get('/tests');
+        const response = await someapi.get('/tests');
 
         dispatch({ type: 'get_tests', payload: response.data});
     };
