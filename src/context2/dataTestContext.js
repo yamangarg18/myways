@@ -8,11 +8,11 @@ const initState = {
   isCompleted: true,
 };
 
-export default (reducer, actions) => {
+export default (reducer, actions, defaultValues) => {
   const Context = React.createContext();
 
   const Provider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initState);
+    const [state, dispatch] = useReducer(reducer, defaultValues);
 
     const boundActions = {};
     for (let key in actions) {
