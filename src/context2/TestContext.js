@@ -2,7 +2,7 @@
 import createTestContext from './createTestContext';
 import someapi from '../api/someapi';
 
-const blogReducer = (state, action) => {
+const testReducer = (state, action) => {
     switch (action.type) {
         case 'get_tests':
             return action.payload;
@@ -19,8 +19,8 @@ const getTests = dispatch => {
     };
 };
 
-export const { Context, Provider } = createDataContext(
-    blogReducer, 
+export const { Context, Provider } = createTestContext(
+    testReducer, 
     { getTests },
     []
 );
