@@ -4,6 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import BackButton from "../components/BackButton";
 import CP1Screen from "./CP1Screen";
 import CP4Stack from "./CP4Screen";
+import InstructionsScreen from "./InstructionsScreen";
 import axios from "axios";
 import { Icon } from "react-native-elements";
 import { REACT_APP_BASE_URL } from "react-native-dotenv";
@@ -142,6 +143,7 @@ const CareerProfileStack = createStackNavigator(
         headerShown: false,
       },
     },
+    Instructions: InstructionsScreen,
   },
   {
     defaultNavigationOptions: {

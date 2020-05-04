@@ -34,30 +34,30 @@ const Expectation = () => {
 
   const [key, setKey] = useState("");
 
-  const right = useRef(null);
-  const left = useRef(null);
+  // const right = useRef(null);
+  // const left = useRef(null);
 
-  useEffect(() => {
-    const getTestsStatus = async () => {
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/api/user/getTestsStatus`
-        );
-        let isCompleted = data.response["expectation"].status ? true : false;
-        setAlreadyTaken(isCompleted);
-        if (isCompleted) {
-          history.push("/analysis/work_orientation");
-        }
-      } catch (error) {
-        if (error.response === undefined) {
-          console.log(error.message);
-        } else {
-          console.log(error.response.data.message);
-        }
-      }
-    };
-    getTestsStatus();
-  }, []);
+  // useEffect(() => {
+  //   const getTestsStatus = async () => {
+  //     try {
+  //       const { data } = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/api/user/getTestsStatus`
+  //       );
+  //       let isCompleted = data.response["expectation"].status ? true : false;
+  //       setAlreadyTaken(isCompleted);
+  //       if (isCompleted) {
+  //         history.push("/analysis/work_orientation");
+  //       }
+  //     } catch (error) {
+  //       if (error.response === undefined) {
+  //         console.log(error.message);
+  //       } else {
+  //         console.log(error.response.data.message);
+  //       }
+  //     }
+  //   };
+  //   getTestsStatus();
+  // }, []);
 
   useEffect(() => {
     if (key === "ArrowRight") {

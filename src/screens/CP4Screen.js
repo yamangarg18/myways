@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -10,9 +10,19 @@ import {
 import { createStackNavigator } from "react-navigation-stack";
 import TestScreen from "./TestScreen";
 import { AntDesign } from "@expo/vector-icons";
+import someapi from "../api/someapi";
+import { Context } from "../context/Test";
 
 const CP4Screen = ({ navigation }) => {
   const testName = navigation.state.params.id;
+  const tests = useSelector((state) => state.test.tests);
+  const dispatch = useDispatch();
+  const [isTestActive, setIsTestActive] = useState(false);
+
+  useEffect(() => {
+    if (!tests) dispatch(startAddTests());
+  }, [dispatch, tests]);
+
   const renderTestIntructions = (testName) => {
     if (tests) {
       let [result] = tests.filter((test) => test.assesmentType === testName);
@@ -68,7 +78,7 @@ const CP4Screen = ({ navigation }) => {
       </View>
       <Button
         title='Start Analysis'
-        onPress={() => navigation.navigate("Test")}
+        onPress={() => navigation.navigate("Instructions", { testName })}
       />
       <View style={styles.navigationContainer}>
         <TouchableOpacity onPress={() => navigation.navigate("CP1")}>

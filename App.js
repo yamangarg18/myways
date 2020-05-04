@@ -9,6 +9,7 @@ import CareerProfileStack from "./src/screens/CareerProfileScreen";
 import UserProfileStack from "./src/screens/UserProfileScreen";
 import EnterSkillsScreen from "./src/screens/EnterSkillsScreen";
 import { Provider } from "./src/context/EducationContext";
+import { Provider as TestProvider } from "./src/context/Test";
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
@@ -22,8 +23,8 @@ const App = createAppContainer(CareerProfileStack);
 
 export default () => {
   return (
-    <AuthProvider>
+    <TestProvider>
       <App />
-    </AuthProvider>
+    </TestProvider>
   );
 };
