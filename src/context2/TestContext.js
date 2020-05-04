@@ -1,10 +1,10 @@
 
-import createDataContext from './createDataContext';
-import jsonServer from '../api/jsonServer';
+import createTestContext from './createTestContext';
+import someapi from '../api/someapi';
 
 const blogReducer = (state, action) => {
     switch (action.type) {
-        case 'get_blogposts':
+        case 'get_tests':
             return action.payload;
         default:
             return state;
