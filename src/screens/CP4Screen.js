@@ -11,10 +11,12 @@ import { createStackNavigator } from "react-navigation-stack";
 import TestScreen from "./TestScreen";
 import { AntDesign } from "@expo/vector-icons";
 import someapi from "../api/someapi";
-import { Context } from "../context/Test";
+import { Context } from "../context2/TestContext";
 
 const CP4Screen = ({ navigation }) => {
   const testName = navigation.state.params.id;
+  const { state, getTests } = useContext(Context);
+  
   const tests = useSelector((state) => state.test.tests);
   const dispatch = useDispatch();
   const [isTestActive, setIsTestActive] = useState(false);
