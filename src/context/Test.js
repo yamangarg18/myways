@@ -79,6 +79,7 @@ const startAddTests = (dispatch) => {
       const res = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/api/tests`
       );
+      console.log(res.data);
       dispatch(addTests(res.data.questions));
     } catch (err) {
       console.log(err);

@@ -1,13 +1,27 @@
 import axios from "axios";
-import React from "react";
+import {
+  ADD_QUESTIONS,
+  CLEAR_RESPONSE,
+  GET_DIFFICULTY,
+  ADD_TESTS,
+  SET_CURRENT_ITEM,
+  ADD_ANSWERS,
+  CURRENT_TEST,
+  LOADING_UI,
+  TEST_STATE,
+  UNLOADING_UI,
+  CURRENT_ANSWERS,
+  QUESTION_STATE,
+} from "./constants";
+import { REACT_APP_BASE_URL } from "react-native-dotenv";
 
 // to load all the tests into redux
-// export const addTests = (tests) => ({
-//   type: ADD_TESTS,
-//   tests,
-// });
+export const addTests = (tests) => ({
+  type: ADD_TESTS,
+  tests,
+});
 
-// // this stores all the questions of the current test
+// this stores all the questions of the current test
 // export const currentTest = (questions) => ({
 //   type: CURRENT_TEST,
 //   questions,
@@ -64,26 +78,27 @@ import React from "react";
 //   };
 // };
 
-// // export const API_URI = "http://edoflip.myways.in/api";
-// // export const API_URI = "http://localhost:2000/api";
+// export const API_URI = "http://edoflip.myways.in/api";
+// export const API_URI = "http://localhost:2000/api";
 
-// // api call to get all the tests from the backend. used in the dashboard
-// export const startAddTests = () => {
-//   return (dispatch) => {
-//     dispatch({ type: LOADING_UI });
-//     return axios
-//       .get(`${process.env.REACT_APP_BASE_URL}/api/tests`)
-//       .then((res) => {
-//         dispatch(addTests(res.data.questions));
-//         dispatch({ type: UNLOADING_UI });
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-// };
+// api call to get all the tests from the backend. used in the dashboard
+export const startAddTests = () => {
+  return (dispatch) => {
+    return axios
+      .get(`${REACT_APP_BASE_URL}/api/tests`)
+      .then((res) => {
+        dispatch(addTests(res.data.questions));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
-// // api call to get the questions for the selected test
+function newFunction(res) {
+  console.log(res.data.questions);
+}
+// api call to get the questions for the selected test
 // export const getCurrentTest = (testName = "deductiveReasoning") => {
 //   return (dispatch, getState) => {
 //     dispatch({ type: LOADING_UI });
@@ -161,15 +176,15 @@ import React from "react";
 //   };
 // };
 
-// // export const sendAnswers2 = (testName,answers) => {
-// //     return (dispatch, getState) => {
-// //         dispatch({ type: LOADING_UI });
-// //         return axios.post(`${API_URI}/test/${testName.toLowerCase()}2`, {response:answers}).then(res => {
-// //             dispatch(currentTest(res.data));
-// //             dispatch({ type: UNLOADING_UI });
-// //             return res.data;
-// //         }).catch(err => {
-// //             console.log(err)
-// //         })
-// //     }
-// // }
+// export const sendAnswers2 = (testName,answers) => {
+//     return (dispatch, getState) => {
+//         dispatch({ type: LOADING_UI });
+//         return axios.post(`${API_URI}/test/${testName.toLowerCase()}2`, {response:answers}).then(res => {
+//             dispatch(currentTest(res.data));
+//             dispatch({ type: UNLOADING_UI });
+//             return res.data;
+//         }).catch(err => {
+//             console.log(err)
+//         })
+//     }
+// }

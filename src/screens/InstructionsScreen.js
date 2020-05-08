@@ -1,47 +1,41 @@
-import React from "react";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
+import { startAddTests } from "../actions/test";
 
 const InstructionsScreen = ({ navigation }) => {
+  const field = navigation.state.params.id;
+
+  const tests = useSelector((state) => state.test.tests);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!tests) dispatch(startAddTests());
+  }, [dispatch, tests]);
+
+  const renderTestIntructions = (testName) => {
+    if (tests) {
+      let [result] = tests.filter((test) => test.assesmentType === testName);
+      return (
+        <View style={styles.container}>
+          <Text style={styles.text1}>{result.assesmentName}</Text>
+          <Text style={styles.text2}>{result.instructions}</Text>
+        </View>
+      );
+    }
+  };
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/favicon.png")} />
-      <Text style={styles.text}>
-        In this section, you will be asked different questions which help us
-        personalize your experience further.
-      </Text>
-      <Text style={styles.text}>
-        Please note that we do not share any of the responses you give in this
-        section with the employers.
-      </Text>
-      <Text style={styles.text}>
-        This section is completely to analyse you for better career planning and
-        this section directly impacts the Career Insights Section and all your
-        recommendations.
-      </Text>
-      <View style={styles.navigationContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate("CareerProfile")}>
-          <View style={styles.navigationView}>
-            <AntDesign style={styles.navigationIcon} name='caretleft' />
-            <Text style={styles.navigationText}>Previous</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("CP4", { id: navigation.state.params.id })
-          }
-        >
-          <View style={styles.navigationView}>
-            <Text style={styles.navigationText}>Next</Text>
-            <AntDesign style={styles.navigationIcon} name='caretright' />
-          </View>
-        </TouchableOpacity>
-      </View>
+      <View>{renderTestIntructions(field)}</View>
     </View>
   );
 };
 
-CP1Screen.navigationOptions = () => {
+InstructionsScreen.navigationOptions = () => {
   return {
     headerShown: false,
   };
@@ -59,10 +53,16 @@ const styles = StyleSheet.create({
     // marginBottom: 5,
     marginTop: 50,
   },
-  text: {
+  text1: {
     color: "black",
     textAlign: "center",
     fontSize: 30,
+    marginTop: 40,
+  },
+  text2: {
+    color: "black",
+    textAlign: "center",
+    fontSize: 20,
     marginTop: 40,
   },
   navigationContainer: {

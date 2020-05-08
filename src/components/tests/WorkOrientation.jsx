@@ -6,8 +6,8 @@ import axios from "axios";
 import { Button, Popup } from "semantic-ui-react";
 import Progress from "react-progressbar";
 import Timer from "react.timer";
-import { history } from "../../routers/AppRouter.js";
-import useEventListener from "use-event-listener";
+// import { history } from "../../routers/AppRouter";
+// import useEventListener from "use-event-listener";
 import Loader from "../Loader";
 
 const WorkOrientation = () => {
@@ -25,55 +25,55 @@ const WorkOrientation = () => {
 
   const [alreadyTaken, setAlreadyTaken] = useState(true);
 
-  const [key, setKey] = useState("");
+  // const [key, setKey] = useState("");
 
-  const right = useRef(null);
-  const left = useRef(null);
+  // const right = useRef(null);
+  // const left = useRef(null);
 
-  useEffect(() => {
-    const getTestsStatus = async () => {
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/api/user/getTestsStatus`
-        );
-        let isCompleted = data.response["work_orientation"].status
-          ? true
-          : false;
-        setAlreadyTaken(isCompleted);
-        if (isCompleted) {
-          history.push("/analysis/personality");
-        }
-      } catch (error) {
-        if (error.response === undefined) {
-          console.log(error.message);
-        } else {
-          console.log(error.response.data.message);
-        }
-      }
-    };
-    getTestsStatus();
-  }, []);
+  // useEffect(() => {
+  // 	const getTestsStatus = async () => {
+  // 		try {
+  // 			const { data } = await axios.get(
+  // 				`${process.env.REACT_APP_BASE_URL}/api/user/getTestsStatus`
+  // 			);
+  // 			let isCompleted = data.response["work_orientation"].status
+  // 				? true
+  // 				: false;
+  // 			setAlreadyTaken(isCompleted);
+  // 			if (isCompleted) {
+  // 				history.push("/analysis/personality");
+  // 			}
+  // 		} catch (error) {
+  // 			if (error.response === undefined) {
+  // 				console.log(error.message);
+  // 			} else {
+  // 				console.log(error.response.data.message);
+  // 			}
+  // 		}
+  // 	};
+  // 	getTestsStatus();
+  // }, []);
 
-  useEffect(() => {
-    if (key === "ArrowRight") {
-      if (right.current !== null) {
-        right.current.click();
-        setKey("");
-      }
-    }
-    if (key === "ArrowLeft") {
-      if (left.current !== null) {
-        left.current.click();
-        setKey("");
-      }
-    }
-  }, [key]);
+  // useEffect(() => {
+  // 	if (key === "ArrowRight") {
+  // 		if (right.current !== null) {
+  // 			right.current.click();
+  // 			setKey("");
+  // 		}
+  // 	}
+  // 	if (key === "ArrowLeft") {
+  // 		if (left.current !== null) {
+  // 			left.current.click();
+  // 			setKey("");
+  // 		}
+  // 	}
+  // }, [key]);
 
-  useEventListener(
-    "keydown", // event to listen to
-    (event) => setKey(event.key)
-    // callback
-  );
+  // useEventListener(
+  // 	"keydown", // event to listen to
+  // 	(event) => setKey(event.key)
+  // 	// callback
+  // );
 
   useEffect(() => {
     const getQuestions = async () => {

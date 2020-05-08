@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   View,
   StyleSheet,
@@ -6,37 +7,16 @@ import {
   Image,
   TouchableOpacity,
   Button,
+  FlatList,
 } from "react-native";
-import { createStackNavigator } from "react-navigation-stack";
-import TestScreen from "./TestScreen";
+import { startAddTests } from "../actions/test";
 import { AntDesign } from "@expo/vector-icons";
-import someapi from "../api/someapi";
-import { Context } from "../context2/TestContext";
 
 const CP4Screen = ({ navigation }) => {
-  const testName = navigation.state.params.id;
-  const { state, getTests } = useContext(Context);
-  
-  const tests = useSelector((state) => state.test.tests);
-  const dispatch = useDispatch();
+  const field = navigation.state.params.id;
+
   const [isTestActive, setIsTestActive] = useState(false);
 
-  useEffect(() => {
-    if (!tests) dispatch(startAddTests());
-  }, [dispatch, tests]);
-
-  const renderTestIntructions = (testName) => {
-    if (tests) {
-      let [result] = tests.filter((test) => test.assesmentType === testName);
-      return (
-        <View style={styles.container}>
-          <Text h1>{result.assesmentName}: Instructions</Text>
-          <View>{result.instructions}</View>
-          <Button title='Start' onPress={() => setIsTestActive(true)} />
-        </View>
-      );
-    }
-  };
   const renderTest = (testName) => {
     switch (testName) {
       case "skill_set":
@@ -54,9 +34,7 @@ const CP4Screen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/favicon.png")} />
-      <Text style={styles.text}>{testName}</Text>
       <Text style={styles.text}>
-        {" "}
         Please, it is recommended to be honest and answer these questions
         seriously
       </Text>
@@ -79,8 +57,8 @@ const CP4Screen = ({ navigation }) => {
         </Text>
       </View>
       <Button
-        title='Start Analysis'
-        onPress={() => navigation.navigate("Instructions", { testName })}
+        title='Instructions'
+        onPress={() => navigation.navigate("Instructions", { id: field })}
       />
       <View style={styles.navigationContainer}>
         <TouchableOpacity onPress={() => navigation.navigate("CP1")}>
@@ -93,11 +71,6 @@ const CP4Screen = ({ navigation }) => {
     </View>
   );
 };
-
-const CP4Stack = createStackNavigator({
-  CP4: CP4Screen,
-  Test: TestScreen,
-});
 
 CP4Screen.navigationOptions = () => {
   return {
@@ -142,6 +115,20 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 10,
   },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderColor: "gray",
+    paddingHorizontal: 10,
+  },
+  title: {
+    fontSize: 18,
+  },
+  icon: {
+    fontSize: 24,
+  },
 });
 
-export default CP4Stack;
+export default CP4Screen;

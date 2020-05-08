@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { startAddTests } from "../../actions/test";
-import { View, StyleSheet, Image, Button, FlatList } from "react-native";
-import { Text } from "react-native-elements";
 // import axios from "axios";
 import SkillSet from "./SkillSet";
 import WorkOrientation from "./WorkOrientation";
@@ -17,19 +15,6 @@ const AnalysisPage = (props) => {
   useEffect(() => {
     if (!tests) dispatch(startAddTests());
   }, [dispatch, tests]);
-
-  const renderTestIntructions = (testName) => {
-    if (tests) {
-      let [result] = tests.filter((test) => test.assesmentType === testName);
-      return (
-        <View style={styles.container}>
-          <Text h1>{result.assesmentName}: Instructions</Text>
-          <View>{result.instructions}</View>
-          <Button title='Start' onPress={() => setIsTestActive(true)} />
-        </View>
-      );
-    }
-  };
 
   const renderTest = (testName) => {
     switch (testName) {
@@ -47,46 +32,11 @@ const AnalysisPage = (props) => {
   };
 
   return (
-    <View>
+    <div className='testpage'>
       {tests && !isTestActive && renderTestIntructions(props.match.params.name)}
       {tests && isTestActive && renderTest(props.match.params.name)}
-    </View>
+    </div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    marginBottom: 200,
-  },
-  logo: {
-    width: 125,
-    height: 120,
-    marginTop: 50,
-  },
-  text: {
-    color: "black",
-    textAlign: "center",
-    fontSize: 30,
-    marginTop: 50,
-    marginBottom: 30,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingVertical: 20,
-    // borderTopWidth: 1,
-    borderColor: "gray",
-    paddingHorizontal: 5,
-  },
-  title: {
-    fontSize: 18,
-    marginRight: 10,
-  },
-  icon: {
-    fontSize: 24,
-  },
-});
 
 export default AnalysisPage;

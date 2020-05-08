@@ -7,30 +7,31 @@ import CP4Stack from "./CP4Screen";
 import InstructionsScreen from "./InstructionsScreen";
 import axios from "axios";
 import { Icon } from "react-native-elements";
+import { AntDesign } from "@expo/vector-icons";
 import { REACT_APP_BASE_URL } from "react-native-dotenv";
 
 const CareerProfileScreen = ({ navigation }) => {
   const [testsStatus, setTestsStatus] = useState([
     {
       id: 1,
-      testName: "Skill Set analysis",
-      isCompleted: false,
+      testName: "Skill Set Analysis",
+      isCompleted: true,
       link: "/analysis/skill_set",
       field: "skill_set",
     },
     {
       id: 2,
-      testName: "Expectation Analysis",
-      isCompleted: false,
-      link: "/analysis/expectation",
-      field: "expectation",
-    },
-    {
-      id: 3,
       testName: "Work Orientation Analysis",
       isCompleted: false,
       link: "/analysis/work_orientation",
       field: "work_orientation",
+    },
+    {
+      id: 3,
+      testName: "Expectation Analysis",
+      isCompleted: false,
+      link: "/analysis/expectation",
+      field: "expectation",
     },
     {
       id: 4,
@@ -80,10 +81,9 @@ const CareerProfileScreen = ({ navigation }) => {
           return (
             <View style={styles.row}>
               <Text style={styles.title}>{item.testName}</Text>
-              <Icon
+              <AntDesign
                 name={iconName}
                 color={iconColor}
-                type='antdesign'
                 style={styles.icon}
               />
             </View>
@@ -95,13 +95,13 @@ const CareerProfileScreen = ({ navigation }) => {
 
   const startTest = (testsStatus) => {
     if (!testsStatus[0].isCompleted) {
-      navigation.navigate("CP1", { id: testsStatus[0].testName });
+      navigation.navigate("CP1", { id: testsStatus[0].field });
     } else if (!testsStatus[1].isCompleted) {
-      navigation.navigate("CP1", { id: testsStatus[1].testName });
+      navigation.navigate("CP1", { id: testsStatus[1].field });
     } else if (!testsStatus[2].isCompleted) {
-      navigation.navigate("CP1", { id: testsStatus[2].testName });
+      navigation.navigate("CP1", { id: testsStatus[2].field });
     } else if (!testsStatus[3].isCompleted) {
-      navigation.navigate("CP1", { id: testsStatus[3].testName });
+      navigation.navigate("CP1", { id: testsStatus[3].field });
     } else {
       navigation.navigate("CareerInsight");
     }
