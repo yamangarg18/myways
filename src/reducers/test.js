@@ -62,11 +62,11 @@ export default (state = initState, action) => {
     // case GET_DIFFICULTY:
     //   state.answers.userDifficulty = action.difficulty;
     //   return state;
-    // case CURRENT_TEST:
-    //   return {
-    //     ...state,
-    //     questions: action.questions,
-    //   };
+    case CURRENT_TEST:
+      return {
+        ...state,
+        questions: action.questions,
+      };
     // case SET_CURRENT_ITEM:
     //   return {
     //     ...state,

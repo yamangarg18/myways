@@ -89,4 +89,9 @@
   }}
 >
   <div className='text'>{pageVisit(testsStatus)}</div>
-</button>;
+</button>
+
+    "imageUrl": "https://image.flaticon.com/icons/svg/1998/1998982.svg",
+    "imageUrl": "https://image.flaticon.com/icons/svg/2072/2072148.svg",
+    "imageUrl": "https://image.flaticon.com/icons/svg/1651/1651619.svg",
+    "imageUrl": "https://image.flaticon.com/icons/svg/2014/2014526.svg",

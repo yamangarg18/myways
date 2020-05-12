@@ -9,7 +9,6 @@ import CareerProfileStack from "./src/screens/CareerProfileScreen";
 import UserProfileStack from "./src/screens/UserProfileScreen";
 import EnterSkillsScreen from "./src/screens/EnterSkillsScreen";
 // import { Provider } from "./src/context/EducationContext";
-import { Provider as TestProvider } from "./src/context2/TestContext";
 import CP4Stack from "./src/screens/CP4Screen";
 import { Provider } from "react-redux";
 import { store } from "./src/store/store";

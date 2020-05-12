@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { Text } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { startAddTests } from "../actions/test";
+import { createStackNavigator } from "react-navigation-stack";
 
 const InstructionsScreen = ({ navigation }) => {
   const field = navigation.state.params.id;
 
   const tests = useSelector((state) => state.test.tests);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,9 +33,26 @@ const InstructionsScreen = ({ navigation }) => {
       );
     }
   };
+
+  const renderTest = (testName) => {
+    if (testName === "skill_set") {
+      navigation.navigate("SkillSet");
+    } else if (testName === "work_orientation") {
+      navigation.navigate("WorkOrientation");
+    } else if (testName === "expectation") {
+      navigation.navigate("Expectation");
+    } else if (testName === "personality") {
+      navigation.navigate("Personality");
+    } else {
+      navigation.navigate("CP4");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/favicon.png")} />
+      <Button title='Start Analysis' onPress={() => renderTest(field)} />
+      <Text>{field}</Text>
       <View>{renderTestIntructions(field)}</View>
     </View>
   );

@@ -22,10 +22,10 @@ export const addTests = (tests) => ({
 });
 
 // this stores all the questions of the current test
-// export const currentTest = (questions) => ({
-//   type: CURRENT_TEST,
-//   questions,
-// });
+export const currentTest = (questions) => ({
+  type: CURRENT_TEST,
+  questions,
+});
 
 // // I dont think If I use this anymore but I'm gonna let it stay here.
 // export const currentAnswers = (answers) => ({
@@ -85,7 +85,7 @@ export const addTests = (tests) => ({
 export const startAddTests = () => {
   return (dispatch) => {
     return axios
-      .get(`${REACT_APP_BASE_URL}/api/tests`)
+      .get(`http://b620912e.ngrok.io/api/tests`)
       .then((res) => {
         dispatch(addTests(res.data.questions));
       })
@@ -94,28 +94,19 @@ export const startAddTests = () => {
       });
   };
 };
-
-function newFunction(res) {
-  console.log(res.data.questions);
-}
 // api call to get the questions for the selected test
-// export const getCurrentTest = (testName = "deductiveReasoning") => {
-//   return (dispatch, getState) => {
-//     dispatch({ type: LOADING_UI });
-//     return axios
-//       .get(
-//         `${process.env.REACT_APP_BASE_URL}/api/test/${testName.toLowerCase()}`
-//       )
-//       .then((res) => {
-//         dispatch(currentTest(res.data));
-//         dispatch({ type: UNLOADING_UI });
-//         console.log(res.data);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-// };
+export const getCurrentTest = () => {
+  return (dispatch) => {
+    return axios
+      .get(`http://ee06364f.ngrok.io/api/test/workOrientation`)
+      .then((res) => {
+        dispatch(currentTest(res.data.questions.questions));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
 // // export const getCurrentTest = (testName = "interestTest") => {
 // //     return (dispatch, getState) => {

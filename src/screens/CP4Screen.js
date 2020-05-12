@@ -11,26 +11,18 @@ import {
 } from "react-native";
 import { startAddTests } from "../actions/test";
 import { AntDesign } from "@expo/vector-icons";
+import { createStackNavigator } from "react-navigation-stack";
+import InstructionsScreen from "./InstructionsScreen";
+import SkillSetScreen from "./SkillSetScreen";
+import WorkOrientationScreen from "./WorkOrientationScreen";
+import ExpectationScreen from "./ExpectationScreen";
+import PersonalityScreen from "./PersonalityScreen";
 
 const CP4Screen = ({ navigation }) => {
   const field = navigation.state.params.id;
 
   const [isTestActive, setIsTestActive] = useState(false);
 
-  const renderTest = (testName) => {
-    switch (testName) {
-      case "skill_set":
-        return <SkillSet />;
-      case "work_orientation":
-        return <WorkOrientation />;
-      case "expectation":
-        return <Expectation />;
-      case "personality":
-        return <Personality />;
-      default:
-        return "Invalid test";
-    }
-  };
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/favicon.png")} />
@@ -77,6 +69,15 @@ CP4Screen.navigationOptions = () => {
     headerShown: false,
   };
 };
+
+const CP4Stack = createStackNavigator({
+  CP4: CP4Screen,
+  Instructions: InstructionsScreen,
+  SkillSet: SkillSetScreen,
+  WorkOrientation: WorkOrientationScreen,
+  Expectation: ExpectationScreen,
+  Personality: PersonalityScreen,
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -131,4 +132,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CP4Screen;
+export default CP4Stack;

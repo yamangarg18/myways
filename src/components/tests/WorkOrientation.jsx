@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+// import { Link } from "react-router-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Button, Popup } from "semantic-ui-react";
-import Progress from "react-progressbar";
+// import Progress from "react-progressbar";
 import Timer from "react.timer";
 // import { history } from "../../routers/AppRouter";
 // import useEventListener from "use-event-listener";
@@ -12,18 +12,18 @@ import Loader from "../Loader";
 
 const WorkOrientation = () => {
   const [isLoading, setisLoading] = useState(true);
-  const [questions, setQuestions] = useState([]);
-  const [questionType, setQuestionType] = useState(0);
-  const [currentTypeQuestion, setCurrentTypeQuestion] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(1);
-  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [questions, setQuestions] = useState([]); //
+  const [questionType, setQuestionType] = useState(0); //
+  const [currentTypeQuestion, setCurrentTypeQuestion] = useState(0); //
+  const [currentQuestion, setCurrentQuestion] = useState(1); //
+  const [totalQuestions, setTotalQuestions] = useState(0); //
   const [previousDisabled, setPreviousDisabled] = useState(true);
   const [nextDisabled, setNextDisabled] = useState(false);
-  const [answers, setAnswers] = useState([]);
-  const [progress, setProgress] = useState(0);
-  const [isTestCompleted, setIsTestCompleted] = useState(false);
+  const [answers, setAnswers] = useState([]); //
+  // const [progress, setProgress] = useState(0);
+  const [isTestCompleted, setIsTestCompleted] = useState(false); //
 
-  const [alreadyTaken, setAlreadyTaken] = useState(true);
+  const [alreadyTaken, setAlreadyTaken] = useState(true); //
 
   // const [key, setKey] = useState("");
 
@@ -106,10 +106,10 @@ const WorkOrientation = () => {
     if (questions.length === 0 && !alreadyTaken) getQuestions();
   }, [questions, alreadyTaken]);
 
-  useEffect(() => {
-    if (totalQuestions > 0)
-      setProgress((currentQuestion / totalQuestions) * 100);
-  }, [currentQuestion, totalQuestions]);
+  // useEffect(() => {
+  //   if (totalQuestions > 0)
+  //     setProgress((currentQuestion / totalQuestions) * 100);
+  // }, [currentQuestion, totalQuestions]);
 
   const handlePrevious = (e) => {
     e.preventDefault();
@@ -189,66 +189,66 @@ const WorkOrientation = () => {
     }
   };
 
-  const handleStarClick = (e) => {
-    // e.preventDefault();
-    console.log("called");
-    let newAnswers = [...answers];
-    newAnswers[questionType].questionSet[currentTypeQuestion].answer =
-      e.target.value;
-    setAnswers(newAnswers);
-    if (right.current !== null) {
-      right.current.click();
-    }
-  };
+  // const handleStarClick = (e) => {
+  //   // e.preventDefault();
+  //   console.log("called");
+  //   let newAnswers = [...answers];
+  //   newAnswers[questionType].questionSet[currentTypeQuestion].answer =
+  //     e.target.value;
+  //   setAnswers(newAnswers);
+  //   if (right.current !== null) {
+  //     right.current.click();
+  //   }
+  // };
 
-  const renderStars = (answers) => {
-    if (answers.length > 0) {
-      return (
-        <div className='container'>
-          <div className='feedback'>
-            <div className='rating'>
-              {["5", "4", "3", "2", "1"].map((num) => (
-                <>
-                  <input
-                    key={num}
-                    type='radio'
-                    name='rating'
-                    value={num}
-                    id={`rating-${num}`}
-                    checked={
-                      answers[questionType].questionSet[currentTypeQuestion]
-                        .answer === num
-                        ? true
-                        : false
-                    }
-                    onChange={handleStarClick}
-                  />
-                  <label htmlFor={`rating-${num}`}></label>
-                </>
-              ))}
-            </div>
-          </div>
-        </div>
-      );
-    }
-  };
+  // const renderStars = (answers) => {
+  //   if (answers.length > 0) {
+  //     return (
+  //       <div className='container'>
+  //         <div className='feedback'>
+  //           <div className='rating'>
+  //             {["5", "4", "3", "2", "1"].map((num) => (
+  //               <>
+  //                 <input
+  //                   key={num}
+  //                   type='radio'
+  //                   name='rating'
+  //                   value={num}
+  //                   id={`rating-${num}`}
+  //                   checked={
+  //                     answers[questionType].questionSet[currentTypeQuestion]
+  //                       .answer === num
+  //                       ? true
+  //                       : false
+  //                   }
+  //                   onChange={handleStarClick}
+  //                 />
+  //                 <label htmlFor={`rating-${num}`}></label>
+  //               </>
+  //             ))}
+  //           </div>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // };
 
-  const handleSubmitTest = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/response/workOrientation`,
-        { response: answers }
-      );
-      history.push("/analysis/personality");
-    } catch (error) {
-      if (error.response === undefined) {
-        console.log(error.message);
-      } else {
-        console.log(error.response.data.message);
-      }
-    }
-  };
+  // const handleSubmitTest = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post(
+  //       `${process.env.REACT_APP_BASE_URL}/api/response/workOrientation`,
+  //       { response: answers }
+  //     );
+  //     history.push("/analysis/personality");
+  //   } catch (error) {
+  //     if (error.response === undefined) {
+  //       console.log(error.message);
+  //     } else {
+  //       console.log(error.response.data.message);
+  //     }
+  //   }
+  // };
   return (
     <>
       {isLoading ? (
@@ -264,8 +264,10 @@ const WorkOrientation = () => {
         </div>
       ) : (
         <>
+          // //{" "}
           <Link className='goto-dashboard' to='/careerProfile'>
-            <FontAwesomeIcon icon={faArrowLeft} />
+            // // <FontAwesomeIcon icon={faArrowLeft} />
+            // // //{" "}
           </Link>
           <Progress completed={progress} color={"#FFC765"} />
           <div title='elapsed time' className='test-timer'>
