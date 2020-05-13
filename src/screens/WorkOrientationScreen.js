@@ -10,6 +10,9 @@ import {
   FlatList,
 } from "react-native";
 import { REACT_APP_BASE_URL } from "react-native-dotenv";
+import { ScrollView } from "react-native-gesture-handler";
+import { AntDesign } from "@expo/vector-icons";
+import Swiper from "react-native-swiper";
 
 const WorkOrientationScreen = ({ navigation }) => {
   const [questions, setQuestions] = useState([]);
@@ -28,7 +31,7 @@ const WorkOrientationScreen = ({ navigation }) => {
     const getQuestions = async () => {
       try {
         const res = await axios.get(
-          `http://b620912e.ngrok.io/api/test/workOrientation`
+          `http://3164cdfe.ngrok.io/api/test/workOrientation`
         );
         let totalQues = 0,
           answers = [];
@@ -139,12 +142,6 @@ const WorkOrientationScreen = ({ navigation }) => {
   return (
     <View>
       <Text>WorkOrientation</Text>
-      <Button
-        title='Submit'
-        onPress={() =>
-          navigation.navigate("Instructions", { id: "expectation" })
-        }
-      />
       <FlatList
         data={questions}
         keyExtractor={(questions) => questions.paragraph}
@@ -152,20 +149,26 @@ const WorkOrientationScreen = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
-            <View>
-              <Text style={styles.title}>{item.paragraph}</Text>
-              <Button
-                title='Submit'
-                onPress={() =>
-                  navigation.navigate("Instructions", { id: "expectation" })
-                }
-              />
-              <Button
-                title='Submit'
-                onPress={() =>
-                  navigation.navigate("Instructions", { id: "expectation" })
-                }
-              />
+            <View style={styles.container1}>
+              <AntDesign style={styles.navigationIcon} name='caretleft' />
+              <View>
+                <Text style={styles.title}>{item.paragraph}</Text>
+                <FlatList
+                  data={item.questionSet}
+                  keyExtractor={(questions) => questions.question}
+                  vertical
+                  contentContainerStyle={styles.container2}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ item }) => {
+                    return (
+                      <View style={styles.row}>
+                        <Text style={styles.title}>{item.question}</Text>
+                      </View>
+                    );
+                  }}
+                />
+              </View>
+              <AntDesign style={styles.navigationIcon} name='caretright' />
             </View>
           );
         }}
@@ -175,9 +178,20 @@ const WorkOrientationScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center", // marginBottom: 200,
+  container1: {
+    // flex: 1,
+    flexDirection: "row",
+
+    alignItems: "center",
+    marginBottom: 1,
+    marginHorizontal: 30,
+    width: 320,
+  },
+  container2: {
+    // flex: 1,
+    alignItems: "center",
+    marginBottom: 1,
+    width: 320,
   },
   logo: {
     // alignSelf: "center",
@@ -205,7 +219,6 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     color: "black",
-    marginHorizontal: 5,
   },
   navigationText: {
     color: "black",
@@ -215,7 +228,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 20,
-    borderTopWidth: 1,
     borderColor: "gray",
     paddingHorizontal: 10,
   },

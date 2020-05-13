@@ -85,7 +85,7 @@ export const currentTest = (questions) => ({
 export const startAddTests = () => {
   return (dispatch) => {
     return axios
-      .get(`http://b620912e.ngrok.io/api/tests`)
+      .get(`http://3164cdfe.ngrok.io/api/tests`)
       .then((res) => {
         dispatch(addTests(res.data.questions));
       })
