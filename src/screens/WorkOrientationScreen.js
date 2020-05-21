@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
 import axios from "axios";
 import {
   View,
@@ -8,42 +8,361 @@ import {
   TouchableOpacity,
   Button,
   FlatList,
+  Dimensions,
 } from "react-native";
 import { REACT_APP_BASE_URL } from "react-native-dotenv";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
+import SwiperFlatList from "react-native-swiper-flatlist";
 
 const WorkOrientationScreen = ({ navigation }) => {
+  const test = [
+    {
+      questionNumber: 1,
+      paragraph:
+        "working through hands with real world materials, using & operating machines, objects, tools, plants & animals in order to solve real world problems in the surrounding. generally in a practical manner. in outdoor and physical environment",
+      questionSet: [
+        {
+          questionNumber: "1",
+          question: "activities that require strength & coordination",
+        },
+        {
+          questionNumber: "2",
+          question: "driving",
+        },
+        {
+          questionNumber: "3",
+          question: "playing with gadgets",
+        },
+        {
+          questionNumber: "4",
+          question: "repairing and fixing",
+        },
+        {
+          questionNumber: "5",
+          question: "doing puzzles/ word game",
+        },
+        {
+          questionNumber: "6",
+          question: "building",
+        },
+        {
+          questionNumber: "7",
+          question: "camping and trekking",
+        },
+        {
+          questionNumber: "8",
+          question: "assembling",
+        },
+        {
+          questionNumber: "9",
+          question: "caring for animals & plants",
+        },
+        {
+          questionNumber: "10",
+          question: "playing a sport",
+        },
+      ],
+    },
+    {
+      questionNumber: "2",
+      paragraph:
+        "working through brain with logics & concepts, information, abstract ideas and theories in order to discover ideas , ask questions, solve problems. generally in a scholarly and reserved way in a well organized and analytical environment",
+      questionSet: [
+        {
+          questionNumber: "1",
+          question: "figuring out problems on mental level",
+        },
+        {
+          questionNumber: "2",
+          question: "doing research",
+        },
+        {
+          questionNumber: "3",
+          question: "thinking analytically and logically",
+        },
+        {
+          questionNumber: "4",
+          question: "computing and formulating",
+        },
+        {
+          questionNumber: "5",
+          question: "calculating",
+        },
+        {
+          questionNumber: "6",
+          question: "explore different ideas",
+        },
+        {
+          questionNumber: "7",
+          question: "investigating and questioning to learn more",
+        },
+        {
+          questionNumber: "8",
+          question: "search for facts",
+        },
+        {
+          questionNumber: "9",
+          question: "evaluating situation",
+        },
+        {
+          questionNumber: "10",
+          question: "observing",
+        },
+      ],
+    },
+    {
+      questionNumber: 3,
+      paragraph:
+        "working through your imagination and creativity, with words, art, music & drama, forms, patterns & design in order to to express (artistically), perform, communicate, design or create things. generally in unstructures setups and in anemotional or expressive way",
+      questionSet: [
+        {
+          questionNumber: 1,
+          question: "performing",
+        },
+        {
+          questionNumber: 2,
+          question: "designing",
+        },
+        {
+          questionNumber: 3,
+          question: "presenting",
+        },
+        {
+          questionNumber: 4,
+          question: "rearranging",
+        },
+        {
+          questionNumber: 5,
+          question: "composing",
+        },
+        {
+          questionNumber: 6,
+          question: "playing instrument/ music/ singing",
+        },
+        {
+          questionNumber: 7,
+          question: "dancing",
+        },
+        {
+          questionNumber: 8,
+          question: "reading",
+        },
+        {
+          questionNumber: 9,
+          question: "decorate",
+        },
+        {
+          questionNumber: 10,
+          question: "take photographs",
+        },
+      ],
+    },
+    {
+      questionNumber: 4,
+      paragraph:
+        "working with people, helping them in order to enlighten, inform, serve or greet them. mainly concerned with welfare of others, assisting others to promote learning & personal growth, in a compassionate and friendly way and warm and supportive environment",
+      questionSet: [
+        {
+          questionNumber: 1,
+          question: "volunteer for a social work",
+        },
+        {
+          questionNumber: 2,
+          question: "caring and supporting",
+        },
+        {
+          questionNumber: 3,
+          question: "work with youth & elderly",
+        },
+        {
+          questionNumber: 4,
+          question: "greeting people",
+        },
+        {
+          questionNumber: 5,
+          question: "assisting/ helping",
+        },
+        {
+          questionNumber: 6,
+          question: "guiding/ teaching/ training",
+        },
+        {
+          questionNumber: 7,
+          question: "studying other cultures",
+        },
+        {
+          questionNumber: 8,
+          question: "attending events",
+        },
+        {
+          questionNumber: 9,
+          question: "making new friends",
+        },
+        {
+          questionNumber: 10,
+          question: "make people laugh",
+        },
+      ],
+    },
+    {
+      questionNumber: 5,
+      paragraph:
+        "working with people, through your mind in an influential way in order to to direct, persuade, lead, perform or manage people for organisational goals or economic gain. generally in a business and action oriented environment, in an adventurous, outgoing and energetic manner",
+      questionSet: [
+        {
+          questionNumber: 1,
+          question: "promoting and persuading/convincing",
+        },
+        {
+          questionNumber: 2,
+          question: "buying and selling",
+        },
+        {
+          questionNumber: 3,
+          question: "public speaking",
+        },
+        {
+          questionNumber: 4,
+          question: "managing and organizing",
+        },
+        {
+          questionNumber: 5,
+          question: "leading and captaining",
+        },
+        {
+          questionNumber: 6,
+          question: "planning/ strategizing",
+        },
+        {
+          questionNumber: 7,
+          question: "risk-taking for profit",
+        },
+        {
+          questionNumber: 8,
+          question: "debating an issue",
+        },
+        {
+          questionNumber: 9,
+          question: "taking charge/ inititate/ start",
+        },
+        {
+          questionNumber: 10,
+          question: "making decisions",
+        },
+      ],
+    },
+    {
+      questionNumber: 6,
+      paragraph:
+        "working with data, details, information and numbers through your mind (analyzing and organizing) in order to structurize things, doing things in details, planning work & events. generally in an environment with set rules and clear line of authority, in a careful, conforming, little or no imaginative, well organised manner",
+      questionSet: [
+        {
+          questionNumber: 1,
+          question: "recording data/ keyboarding",
+        },
+        {
+          questionNumber: 2,
+          question: "doing calculations/ computing",
+        },
+        {
+          questionNumber: 3,
+          question: "handling money",
+        },
+        {
+          questionNumber: 4,
+          question: "organizing",
+        },
+        {
+          questionNumber: 5,
+          question: "structuring plans",
+        },
+        {
+          questionNumber: 6,
+          question: "working in a routine ( 9am to 5pm)",
+        },
+        {
+          questionNumber: 7,
+          question: "following rules & regulations",
+        },
+        {
+          questionNumber: 8,
+          question: "do paper work",
+        },
+        {
+          questionNumber: 9,
+          question: "keeping records/ notes",
+        },
+        {
+          questionNumber: 10,
+          question: "working at desk",
+        },
+      ],
+    },
+  ];
   const [questions, setQuestions] = useState([]);
   const [questionType, setQuestionType] = useState(0);
   const [currentTypeQuestion, setCurrentTypeQuestion] = useState(0);
-
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(0);
+  const [previousDisabled, setPreviousDisabled] = useState(true);
+  const [nextDisabled, setNextDisabled] = useState(false);
   const [answers, setAnswers] = useState([]);
 
   const [isTestCompleted, setIsTestCompleted] = useState(false);
 
   const [alreadyTaken, setAlreadyTaken] = useState(false);
 
+  // useEffect(() => {
+  //   const getQuestions = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         `http://5307bd43.ngrok.io/api/test/workOrientation`
+  //       );
+  //       let totalQues = 0,
+  //         answers = [];
+  //       res.data.questions.questions.forEach((type) => {
+  //         type.questionSet = type.questionSet.map((ques) => {
+  //           ques.answer = "";
+  //         totalQues++;
+  //           return ques;
+  //         });
+  //         answers.push(type);
+  //       });
+  //       setQuestions(res.data.questions.questions);
+  //       setTotalQuestions(totalQues);
+  //       setAnswers(answers);
+  //     } catch (error) {
+  //       if (error.response === undefined) {
+  //         console.log(error.message);
+  //       } else {
+  //         console.log(error.response.data.message);
+  //       }
+  //     }
+  //   };
+  //   if (questions.length === 0 && !alreadyTaken) getQuestions();
+  // }, [questions, totalQuestions, answers, alreadyTaken]);
+
+  // console.log(questions);
+  // console.log(totalQuestions);
+  // console.log(answers);
+
   useEffect(() => {
     const getQuestions = async () => {
       try {
-        const res = await axios.get(
-          `http://3164cdfe.ngrok.io/api/test/workOrientation`
-        );
+        const res = test;
         let totalQues = 0,
           answers = [];
-        res.data.questions.questions.forEach((type) => {
+        res.forEach((type) => {
           type.questionSet = type.questionSet.map((ques) => {
-            ques.answer = "";
+            ques.answer = "0";
+            totalQues++;
             return ques;
           });
-          totalQues++;
           answers.push(type);
         });
-        setQuestions(res.data.questions.questions);
+        setQuestions(res);
         setTotalQuestions(totalQues);
         setAnswers(answers);
       } catch (error) {
@@ -57,9 +376,9 @@ const WorkOrientationScreen = ({ navigation }) => {
     if (questions.length === 0 && !alreadyTaken) getQuestions();
   }, [questions, totalQuestions, answers, alreadyTaken]);
 
-  console.log(questions);
-  console.log(totalQuestions);
-  console.log(answers);
+  console.log(questions, "hi");
+  console.log(totalQuestions, "Hello");
+  console.log(answers, "bye");
 
   const handlePrevious = (e) => {
     if (totalQuestions >= currentQuestion) {
@@ -89,7 +408,6 @@ const WorkOrientationScreen = ({ navigation }) => {
   };
 
   const handleNext = (e) => {
-    e.preventDefault();
     if (totalQuestions !== currentQuestion) {
       if (questions[questionType] !== undefined) {
         //when array contains these question types
@@ -138,60 +456,108 @@ const WorkOrientationScreen = ({ navigation }) => {
       }
     }
   };
-
-  return (
-    <View>
-      <Text>WorkOrientation</Text>
-      <FlatList
-        data={questions}
-        keyExtractor={(questions) => questions.paragraph}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => {
-          return (
-            <View style={styles.container1}>
-              <AntDesign style={styles.navigationIcon} name='caretleft' />
-              <View>
-                <Text style={styles.title}>{item.paragraph}</Text>
-                <FlatList
-                  data={item.questionSet}
-                  keyExtractor={(questions) => questions.question}
-                  vertical
-                  contentContainerStyle={styles.container2}
-                  showsVerticalScrollIndicator={false}
-                  renderItem={({ item }) => {
-                    return (
-                      <View style={styles.row}>
-                        <Text style={styles.title}>{item.question}</Text>
-                      </View>
-                    );
-                  }}
-                />
-              </View>
-              <AntDesign style={styles.navigationIcon} name='caretright' />
-            </View>
+  class StarRatingBar extends Component {
+    UpdateRating(key) {
+      let newAnswers = [...answers];
+      newAnswers[questionType].questionSet[
+        currentTypeQuestion
+      ].answer = `${key}`;
+      setAnswers(newAnswers);
+    }
+    render() {
+      if (answers.length > 0) {
+        let React_Native_Bar = [];
+        for (var i = 1; i <= 5; i++) {
+          React_Native_Bar.push(
+            <TouchableOpacity
+              activeOpacity={0.5}
+              key={i}
+              onPress={this.UpdateRating.bind(this, i)}
+            >
+              <Image
+                style={styles.star}
+                source={
+                  i <=
+                  answers[questionType].questionSet[currentTypeQuestion].answer
+                    ? require("../../assets/star_filled.png")
+                    : require("../../assets/star_corner.png")
+                }
+              ></Image>
+            </TouchableOpacity>
           );
-        }}
-      />
-    </View>
+        }
+        return (
+          <View style={styles.mainContainer}>
+            <View style={styles.childView}>{React_Native_Bar}</View>
+            <Text>
+              {answers[questionType].questionSet[currentTypeQuestion].answer}
+            </Text>
+          </View>
+        );
+      }
+    }
+  }
+  return (
+    <>
+      {questions.length > 0 ? (
+        <View style={styles.container1}>
+          <Text>How much does this activity interest you? </Text>
+          <Text>
+            {questions[questionType].questionSet[currentTypeQuestion].question}
+          </Text>
+          <StarRatingBar></StarRatingBar>
+          <Button title='Previous' onPress={() => handlePrevious()} />
+          <Button title='Next' onPress={() => handleNext()} />
+        </View>
+      ) : null}
+    </>
   );
 };
 
+WorkOrientationScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+
+export const { width, height } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   container1: {
-    // flex: 1,
-    flexDirection: "row",
-
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 1,
-    marginHorizontal: 30,
-    width: 320,
+
+    // flexDirection: "row",
+    // marginBottom: 1,
+    // marginHorizontal: 30,
+    // width: 320,
+  },
+  child1: {
+    // flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 200,
+
+    // height,
+    width,
+    justifyContent: "center",
+    // marginHorizontal: 5,
+  },
+  child2: {
+    justifyContent: "center",
+
+    flexDirection: "row",
+    // alignItems: "center",
+    // height,
+    // width,
+    // justifyContent: "center",
+    // marginHorizontal: 5,
   },
   container2: {
     // flex: 1,
     alignItems: "center",
-    marginBottom: 1,
-    width: 320,
+    // marginBottom: 1,
+    // width: 320,
   },
   logo: {
     // alignSelf: "center",
@@ -214,11 +580,14 @@ const styles = StyleSheet.create({
   },
   navigationView: {
     flexDirection: "row",
+    marginTop: 20,
   },
-  navigationIcon: {
+  navigationButton: {
     width: 20,
     height: 20,
     color: "black",
+    marginVertical: 10,
+    marginHorizontal: 5,
   },
   navigationText: {
     color: "black",
@@ -233,9 +602,27 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    marginBottom: 5,
+    textAlign: "center",
   },
   icon: {
     fontSize: 24,
+  },
+  mainContainer: {
+    // flex: 1,
+    // justifyContent: "center",
+    alignItems: "center",
+    // padding: 10,
+  },
+  childView: {
+    // justifyContent: "center",
+    flexDirection: "row",
+    // marginTop: 20,
+  },
+  star: {
+    height: 20,
+    width: 20,
+    resizeMode: "cover",
   },
 });
 export default WorkOrientationScreen;

@@ -201,37 +201,37 @@ const WorkOrientation = () => {
   //   }
   // };
 
-  // const renderStars = (answers) => {
-  //   if (answers.length > 0) {
-  //     return (
-  //       <div className='container'>
-  //         <div className='feedback'>
-  //           <div className='rating'>
-  //             {["5", "4", "3", "2", "1"].map((num) => (
-  //               <>
-  //                 <input
-  //                   key={num}
-  //                   type='radio'
-  //                   name='rating'
-  //                   value={num}
-  //                   id={`rating-${num}`}
-  //                   checked={
-  //                     answers[questionType].questionSet[currentTypeQuestion]
-  //                       .answer === num
-  //                       ? true
-  //                       : false
-  //                   }
-  //                   onChange={handleStarClick}
-  //                 />
-  //                 <label htmlFor={`rating-${num}`}></label>
-  //               </>
-  //             ))}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  // };
+  const renderStars = (answers) => {
+    if (answers.length > 0) {
+      return (
+        <div className='container'>
+          <div className='feedback'>
+            <div className='rating'>
+              {["5", "4", "3", "2", "1"].map((num) => (
+                <>
+                  <input
+                    key={num}
+                    type='radio'
+                    name='rating'
+                    value={num}
+                    id={`rating-${num}`}
+                    checked={
+                      answers[questionType].questionSet[currentTypeQuestion]
+                        .answer === num
+                        ? true
+                        : false
+                    }
+                    onChange={handleStarClick}
+                  />
+                  <label htmlFor={`rating-${num}`}></label>
+                </>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+  };
 
   // const handleSubmitTest = async (e) => {
   //   e.preventDefault();

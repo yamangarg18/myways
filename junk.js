@@ -95,3 +95,50 @@
     "imageUrl": "https://image.flaticon.com/icons/svg/2072/2072148.svg",
     "imageUrl": "https://image.flaticon.com/icons/svg/1651/1651619.svg",
     "imageUrl": "https://image.flaticon.com/icons/svg/2014/2014526.svg",
+
+    <FlatList
+        data={questions}
+        keyExtractor={(questions) => questions.paragraph}
+        horizontal
+        // showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => {
+          return (
+            <View style={styles.child1}>
+              <FlatList
+                data={item.questionSet}
+                keyExtractor={(questions) => questions.question}
+                // vertical
+                // contentContainerStyle={styles.container2}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item }) => {
+                  return (
+                    <View style={styles.container2}>
+                      <Text style={styles.title}>{item.question}</Text>
+                    </View>
+                  );
+                }}
+              />
+              <View style={styles.child2}>
+                <Button
+                  title='Previous'
+                  style={styles.navigationButton}
+                  onPress={() =>
+                    navigation.navigate("Instructions", {
+                      id: "work_orientation",
+                    })
+                  }
+                />
+                <Button
+                  title='Next'
+                  style={styles.navigationButton}
+                  onPress={() =>
+                    navigation.navigate("Instructions", {
+                      id: "work_orientation",
+                    })
+                  }
+                />
+              </View>
+            </View>
+          );
+        }}
+      />
