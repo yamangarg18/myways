@@ -189,17 +189,17 @@ const WorkOrientation = () => {
     }
   };
 
-  // const handleStarClick = (e) => {
-  //   // e.preventDefault();
-  //   console.log("called");
-  //   let newAnswers = [...answers];
-  //   newAnswers[questionType].questionSet[currentTypeQuestion].answer =
-  //     e.target.value;
-  //   setAnswers(newAnswers);
-  //   if (right.current !== null) {
-  //     right.current.click();
-  //   }
-  // };
+  const handleStarClick = (e) => {
+    // e.preventDefault();
+    console.log("called");
+    let newAnswers = [...answers];
+    newAnswers[questionType].questionSet[currentTypeQuestion].answer =
+      e.target.value;
+    setAnswers(newAnswers);
+    if (right.current !== null) {
+      right.current.click();
+    }
+  };
 
   const renderStars = (answers) => {
     if (answers.length > 0) {
@@ -233,22 +233,22 @@ const WorkOrientation = () => {
     }
   };
 
-  // const handleSubmitTest = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await axios.post(
-  //       `${process.env.REACT_APP_BASE_URL}/api/response/workOrientation`,
-  //       { response: answers }
-  //     );
-  //     history.push("/analysis/personality");
-  //   } catch (error) {
-  //     if (error.response === undefined) {
-  //       console.log(error.message);
-  //     } else {
-  //       console.log(error.response.data.message);
-  //     }
-  //   }
-  // };
+  const handleSubmitTest = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/response/workOrientation`,
+        { response: answers }
+      );
+      history.push("/analysis/personality");
+    } catch (error) {
+      if (error.response === undefined) {
+        console.log(error.message);
+      } else {
+        console.log(error.response.data.message);
+      }
+    }
+  };
   return (
     <>
       {isLoading ? (

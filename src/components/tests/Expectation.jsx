@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+// import { Link } from "react-router-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import Progress from "react-progressbar";
-import Timer from "react.timer";
-import { history } from "../../routers/AppRouter.js";
-import useEventListener from "use-event-listener";
+// import Progress from "react-progressbar";
+// import Timer from "react.timer";
+// import { history } from "../../routers/AppRouter";
+// import useEventListener from "use-event-listener";
 import styles from "./styles/expectation.module.scss";
 import Loader from "../Loader";
 
@@ -32,7 +32,7 @@ const Expectation = () => {
 
   const [alreadyTaken, setAlreadyTaken] = useState(true);
 
-  const [key, setKey] = useState("");
+  // const [key, setKey] = useState("");
 
   // const right = useRef(null);
   // const left = useRef(null);
@@ -59,26 +59,26 @@ const Expectation = () => {
   //   getTestsStatus();
   // }, []);
 
-  useEffect(() => {
-    if (key === "ArrowRight") {
-      if (right.current !== null) {
-        right.current.click();
-        setKey("");
-      }
-    }
-    if (key === "ArrowLeft") {
-      if (left.current !== null) {
-        left.current.click();
-        setKey("");
-      }
-    }
-  }, [key]);
+  // useEffect(() => {
+  //   if (key === "ArrowRight") {
+  //     if (right.current !== null) {
+  //       right.current.click();
+  //       setKey("");
+  //     }
+  //   }
+  //   if (key === "ArrowLeft") {
+  //     if (left.current !== null) {
+  //       left.current.click();
+  //       setKey("");
+  //     }
+  //   }
+  // }, [key]);
 
-  useEventListener(
-    "keydown", // event to listen to
-    (event) => setKey(event.key)
-    // callback
-  );
+  // useEventListener(
+  //   "keydown", // event to listen to
+  //   (event) => setKey(event.key)
+  //   // callback
+  // );
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -112,10 +112,10 @@ const Expectation = () => {
     }
   }, [questions, alreadyTaken]);
 
-  useEffect(() => {
-    if (totalQuestions > 0)
-      setProgress((currentQuestion / totalQuestions) * 100);
-  }, [currentQuestion, totalQuestions]);
+  // useEffect(() => {
+  //   if (totalQuestions > 0)
+  //     setProgress((currentQuestion / totalQuestions) * 100);
+  // }, [currentQuestion, totalQuestions]);
 
   const handlePrevious = (e) => {
     e.preventDefault();
@@ -382,3 +382,8 @@ const Expectation = () => {
 };
 
 export default Expectation;
+<View>
+  {currentTypeQuestion === 0
+    ? renderOptions(firstPageOptions)
+    : renderOptions(secondPageOptions)}
+</View>;

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+// import { Link } from "react-router-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import Progress from "react-progressbar";
-import Timer from "react.timer";
-import { history } from "../../routers/AppRouter.js";
-import useEventListener from "use-event-listener";
-import styles from "./styles/expectation.module.scss";
-import Loader from "../Loader";
+// import Progress from "react-progressbar";
+// import Timer from "react.timer";
+// import { history } from "../../routers/AppRouter";
+// import useEventListener from "use-event-listener";
+// import styles from "./styles/expectation.module.scss";
+// import Loader from "../Loader";
 
 const Personality = () => {
   const [isLoading, setisLoading] = useState(true);
@@ -24,53 +24,53 @@ const Personality = () => {
 
   const [alreadyTaken, setAlreadyTaken] = useState(true);
 
-  const [key, setKey] = useState("");
+  // const [key, setKey] = useState("");
 
-  const right = useRef(null);
-  const left = useRef(null);
+  // const right = useRef(null);
+  // const left = useRef(null);
 
-  useEffect(() => {
-    const getTestsStatus = async () => {
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/api/user/getTestsStatus`
-        );
-        let isCompleted = data.response["personality"].status ? true : false;
-        setAlreadyTaken(isCompleted);
-        if (isCompleted) {
-          history.push("/careerProfile");
-        }
-      } catch (error) {
-        if (error.response === undefined) {
-          console.log(error.message);
-        } else {
-          console.log(error.response.data.message);
-        }
-      }
-    };
-    getTestsStatus();
-  }, []);
+  // useEffect(() => {
+  //   const getTestsStatus = async () => {
+  //     try {
+  //       const { data } = await axios.get(
+  //         `${process.env.REACT_APP_BASE_URL}/api/user/getTestsStatus`
+  //       );
+  //       let isCompleted = data.response["personality"].status ? true : false;
+  //       setAlreadyTaken(isCompleted);
+  //       if (isCompleted) {
+  //         history.push("/careerProfile");
+  //       }
+  //     } catch (error) {
+  //       if (error.response === undefined) {
+  //         console.log(error.message);
+  //       } else {
+  //         console.log(error.response.data.message);
+  //       }
+  //     }
+  //   };
+  //   getTestsStatus();
+  // }, []);
 
-  useEffect(() => {
-    if (key === "ArrowRight") {
-      if (right.current !== null) {
-        right.current.click();
-        setKey("");
-      }
-    }
-    if (key === "ArrowLeft") {
-      if (left.current !== null) {
-        left.current.click();
-        setKey("");
-      }
-    }
-  }, [key]);
+  // useEffect(() => {
+  //   if (key === "ArrowRight") {
+  //     if (right.current !== null) {
+  //       right.current.click();
+  //       setKey("");
+  //     }
+  //   }
+  //   if (key === "ArrowLeft") {
+  //     if (left.current !== null) {
+  //       left.current.click();
+  //       setKey("");
+  //     }
+  //   }
+  // }, [key]);
 
-  useEventListener(
-    "keydown", // event to listen to
-    (event) => setKey(event.key)
-    // callback
-  );
+  // useEventListener(
+  //   "keydown", // event to listen to
+  //   (event) => setKey(event.key)
+  //   // callback
+  // );
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -99,10 +99,10 @@ const Personality = () => {
     if (questions.length === 0 && !alreadyTaken) getQuestions();
   }, [questions, type, alreadyTaken]);
 
-  useEffect(() => {
-    if (totalQuestions > 0)
-      setProgress((currentQuestion / totalQuestions) * 100);
-  }, [currentQuestion, totalQuestions]);
+  // useEffect(() => {
+  //   if (totalQuestions > 0)
+  //     setProgress((currentQuestion / totalQuestions) * 100);
+  // }, [currentQuestion, totalQuestions]);
 
   const handlePrevious = (e) => {
     console.log(currentQuestion);
@@ -314,3 +314,5 @@ const Personality = () => {
 };
 
 export default Personality;
+
+<View>{renderOptions(questions[currentQuestion - 1].options)}</View>;

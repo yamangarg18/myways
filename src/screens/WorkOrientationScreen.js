@@ -8,13 +8,8 @@ import {
   TouchableOpacity,
   Button,
   FlatList,
-  Dimensions,
 } from "react-native";
 import { REACT_APP_BASE_URL } from "react-native-dotenv";
-import { ScrollView } from "react-native-gesture-handler";
-import { AntDesign } from "@expo/vector-icons";
-import Swiper from "react-native-swiper";
-import SwiperFlatList from "react-native-swiper-flatlist";
 
 const WorkOrientationScreen = ({ navigation }) => {
   const test = [
@@ -376,12 +371,12 @@ const WorkOrientationScreen = ({ navigation }) => {
     if (questions.length === 0 && !alreadyTaken) getQuestions();
   }, [questions, totalQuestions, answers, alreadyTaken]);
 
-  console.log(questions, "hi");
-  console.log(totalQuestions, "Hello");
-  console.log(answers, "bye");
+  console.log(questions, "hi3");
+  console.log(totalQuestions, "Hello3");
+  console.log(answers, "bye3");
 
-  const handlePrevious = (e) => {
-    if (totalQuestions >= currentQuestion) {
+  const handlePrevious = () => {
+    if (totalQuestions >= currentQuestion && currentQuestion !== 1) {
       if (questions[questionType] !== undefined) {
         //when array contains these question types
         if (
@@ -404,10 +399,14 @@ const WorkOrientationScreen = ({ navigation }) => {
           }
         }
       }
+    } else {
+      if (currentQuestion == 1) {
+        navigation.navigate("Instructions", { id: "work_orientation" });
+      }
     }
   };
 
-  const handleNext = (e) => {
+  const handleNext = () => {
     if (totalQuestions !== currentQuestion) {
       if (questions[questionType] !== undefined) {
         //when array contains these question types
@@ -417,7 +416,8 @@ const WorkOrientationScreen = ({ navigation }) => {
         ) {
           //if there are more questions of these type then set it
           if (
-            answers[questionType].questionSet[currentTypeQuestion].answer === ""
+            answers[questionType].questionSet[currentTypeQuestion].answer ===
+            "0"
           ) {
             alert("Please select an option to continue");
           } else {
@@ -430,7 +430,7 @@ const WorkOrientationScreen = ({ navigation }) => {
           if (questions[questionType + 1] !== undefined) {
             if (
               answers[questionType].questionSet[currentTypeQuestion].answer ===
-              ""
+              "0"
             ) {
               alert("Please select an option to continue");
             } else {
@@ -445,7 +445,7 @@ const WorkOrientationScreen = ({ navigation }) => {
     } else {
       if (totalQuestions === currentQuestion) {
         if (
-          answers[questionType].questionSet[currentTypeQuestion].answer === ""
+          answers[questionType].questionSet[currentTypeQuestion].answer === "0"
         ) {
           alert("Please select an option to continue");
         } else {
@@ -456,6 +456,7 @@ const WorkOrientationScreen = ({ navigation }) => {
       }
     }
   };
+
   class StarRatingBar extends Component {
     UpdateRating(key) {
       let newAnswers = [...answers];
@@ -486,30 +487,71 @@ const WorkOrientationScreen = ({ navigation }) => {
             </TouchableOpacity>
           );
         }
-        return (
-          <View style={styles.mainContainer}>
-            <View style={styles.childView}>{React_Native_Bar}</View>
-            <Text>
-              {answers[questionType].questionSet[currentTypeQuestion].answer}
-            </Text>
-          </View>
-        );
+        return <View style={styles.mainContainer}>{React_Native_Bar}</View>;
       }
     }
   }
+
+  const handleSubmitTest = () => {
+    try {
+      navigation.navigate("Instructions", { id: "personality" });
+    } catch (error) {
+      if (error.response === undefined) {
+        console.log(error.message);
+      } else {
+        console.log(error.response.data.message);
+      }
+    }
+  };
+
   return (
     <>
-      {questions.length > 0 ? (
+      {isTestCompleted ? (
         <View style={styles.container1}>
-          <Text>How much does this activity interest you? </Text>
-          <Text>
-            {questions[questionType].questionSet[currentTypeQuestion].question}
+          <Text style={styles.text1}>
+            Are you sure you want to finish this test?
           </Text>
-          <StarRatingBar></StarRatingBar>
-          <Button title='Previous' onPress={() => handlePrevious()} />
-          <Button title='Next' onPress={() => handleNext()} />
+          <View style={styles.navigationContainer}>
+            <Button
+              title='No '
+              onPress={() => {
+                setIsTestCompleted(false);
+                setNextDisabled(false);
+              }}
+            />
+            <Button title='Submit ' onPress={() => handleSubmitTest()} />
+          </View>
         </View>
-      ) : null}
+      ) : (
+        <>
+          {questions.length > 0 ? (
+            <View style={styles.container1}>
+              <Text style={styles.text1}>
+                How much does this activity interest you?
+              </Text>
+              <Text style={styles.text2}>
+                {
+                  questions[questionType].questionSet[currentTypeQuestion]
+                    .question
+                }
+              </Text>
+              <StarRatingBar></StarRatingBar>
+              <View style={styles.navigationContainer}>
+                <Button
+                  style={styles.navigationButton}
+                  title='Previous '
+                  onPress={() => handlePrevious()}
+                />
+                <Button
+                  style={styles.navigationButton}
+                  title='Next'
+                  onPress={() => handleNext()}
+                />
+              </View>
+            </View>
+          ) : null}
+        </>
+      )}
     </>
   );
 };
@@ -520,16 +562,13 @@ WorkOrientationScreen.navigationOptions = () => {
   };
 };
 
-export const { width, height } = Dimensions.get("window");
-
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
 
     // flexDirection: "row",
-    // marginBottom: 1,
+    // marginVertical: 50,
     // marginHorizontal: 30,
     // width: 320,
   },
@@ -539,7 +578,6 @@ const styles = StyleSheet.create({
     marginVertical: 200,
 
     // height,
-    width,
     justifyContent: "center",
     // marginHorizontal: 5,
   },
@@ -566,28 +604,37 @@ const styles = StyleSheet.create({
     // marginBottom: 5,
     marginTop: 50,
   },
-  text: {
+  text1: {
     color: "black",
     textAlign: "center",
     fontSize: 30,
-    marginTop: 40,
+    marginVertical: 40,
+    marginHorizontal: 10,
+  },
+  text2: {
+    color: "black",
+    textAlign: "center",
+    fontSize: 20,
+    marginTop: 20,
+    marginHorizontal: 10,
   },
   navigationContainer: {
     flexDirection: "row",
-    justifyContent: "flex-end",
-    flex: 1,
-    marginBottom: 5,
+    // alignItems: "flex-end",
+
+    justifyContent: "space-around", // flex: 1,
+    // marginBottom: 5,
   },
   navigationView: {
     flexDirection: "row",
     marginTop: 20,
   },
   navigationButton: {
-    width: 20,
-    height: 20,
-    color: "black",
-    marginVertical: 10,
-    marginHorizontal: 5,
+    width: 50,
+    height: 50,
+    // color: "black",
+    // marginVertical: 10,
+    // marginHorizontal: 5,
   },
   navigationText: {
     color: "black",
@@ -610,9 +657,10 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     // flex: 1,
-    // justifyContent: "center",
-    alignItems: "center",
-    // padding: 10,
+    justifyContent: "center",
+    // alignItems: "center",
+    marginVertical: 30,
+    flexDirection: "row",
   },
   childView: {
     // justifyContent: "center",
@@ -620,8 +668,8 @@ const styles = StyleSheet.create({
     // marginTop: 20,
   },
   star: {
-    height: 20,
-    width: 20,
+    height: 40,
+    width: 40,
     resizeMode: "cover",
   },
 });

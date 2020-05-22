@@ -20,17 +20,17 @@ const CareerProfileScreen = ({ navigation }) => {
     },
     {
       id: 2,
-      testName: "Work Orientation Analysis",
-      isCompleted: false,
-      link: "/analysis/work_orientation",
-      field: "work_orientation",
-    },
-    {
-      id: 3,
       testName: "Expectation Analysis",
       isCompleted: false,
       link: "/analysis/expectation",
       field: "expectation",
+    },
+    {
+      id: 3,
+      testName: "Work Orientation Analysis",
+      isCompleted: false,
+      link: "/analysis/work_orientation",
+      field: "work_orientation",
     },
     {
       id: 4,

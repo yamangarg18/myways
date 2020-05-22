@@ -74,8 +74,8 @@ const CP4Stack = createStackNavigator({
   CP4: CP4Screen,
   Instructions: InstructionsScreen,
   SkillSet: SkillSetScreen,
-  WorkOrientation: WorkOrientationScreen,
   Expectation: ExpectationScreen,
+  WorkOrientation: WorkOrientationScreen,
   Personality: PersonalityScreen,
 });
 

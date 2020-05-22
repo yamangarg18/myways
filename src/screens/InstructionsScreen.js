@@ -66,10 +66,10 @@ const InstructionsScreen = ({ navigation }) => {
   const renderTest = (testName) => {
     if (testName === "skill_set") {
       navigation.navigate("SkillSet");
-    } else if (testName === "work_orientation") {
-      navigation.navigate("WorkOrientation");
     } else if (testName === "expectation") {
       navigation.navigate("Expectation");
+    } else if (testName === "work_orientation") {
+      navigation.navigate("WorkOrientation");
     } else if (testName === "personality") {
       navigation.navigate("Personality");
     } else {

@@ -18,7 +18,7 @@ const SkillSetScreen = ({ navigation }) => {
       <Button
         title='Submit'
         onPress={() =>
-          navigation.navigate("Instructions", { id: "work_orientation" })
+          navigation.navigate("Instructions", { id: "expectation" })
         }
       />
     </View>
