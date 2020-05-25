@@ -298,7 +298,7 @@ const ExpectationScreen = ({ navigation }) => {
   const renderOptions = (options) => {
     if (options.length > 0) {
       return (
-        <div>
+        <View>
           {options.map((option) => (
             <button>
               <input
@@ -319,12 +319,12 @@ const ExpectationScreen = ({ navigation }) => {
                 onChange={handleOptionChange}
               />
               <label htmlFor={`${option.optionNumber}`}>
-                <div className={`${styles.checker}`}></div>
+                <View className={`${styles.checker}`}></View>
                 {option.option}
               </label>
             </button>
           ))}
-        </div>
+        </View>
       );
     }
   };

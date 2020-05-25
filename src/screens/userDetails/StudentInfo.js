@@ -1,21 +1,21 @@
 import React, { useState, memo, useCallback, useEffect } from "react";
-import {
-  Button,
-  Form,
-  Grid,
-  Image,
-  List,
-  Search,
-  Label,
-} from "semantic-ui-react";
-import styled from "styled-components";
+// import {
+//   Button,
+//   Form,
+//   Grid,
+//   Image,
+//   List,
+//   Search,
+//   Label,
+// } from "semantic-ui-react";
+// import styled from "styled-components";
 import { Dropdown } from "semantic-ui-react";
 import { city } from "../../globalvariables/citites";
 import { degrees } from "../../globalvariables/degrees";
-import styles from "./StudentInfo.module.css";
+// import styles from "./StudentInfo.module.css";
 import axios from "axios";
 import { debounce } from "./../../util/helpers";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 
 const getStartYear = () => {
   var currentYear = new Date().getFullYear();
@@ -288,7 +288,7 @@ function StudentInfo({ formData, prevStep, nextStep, setFormData, errors }) {
           >
             <div className='student-form profile-card animated fadeInDown'>
               {/* <div className="profile-banner"><div>
-        </div><FontAwesomeIcon icon={faUsers} />Profile</div> */}
+         </div><FontAwesomeIcon icon={faUsers} />Profile</div> */}
               <Form>
                 <Grid
                   style={{

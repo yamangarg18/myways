@@ -1,0 +1,198 @@
+export const degrees = [
+  {
+    key: "b.arch",
+    text: "Bachelor of Architecture",
+    value: "Bachelor of Architecture",
+  },
+  { key: "b.a.", text: "Bachelor of Arts", value: "Bachelor of Arts" },
+  {
+    key: "b.a.m.s.",
+    text: "Bachelor of Ayurvedic Medicine and Surgery",
+    value: "Bachelor of Ayurvedic Medicine and Surgery",
+  },
+  {
+    key: "b.b.a.",
+    text: "Bachelor of Business Administration",
+    value: "Bachelor of Business Administration",
+  },
+  {
+    key: "b.com.",
+    text: "Bachelor of Commerce",
+    value: "Bachelor of Commerce",
+  },
+  {
+    key: "b.c.a.",
+    text: "Bachelor of Computer Applications",
+    value: "Bachelor of Computer Applications",
+  },
+  {
+    key: "b.d.s.",
+    text: "Bachelor of Dental Surgery",
+    value: "Bachelor of Dental Surgery",
+  },
+  {
+    key: "b.des./b.d.",
+    text: "Bachelor of Design",
+    value: "Bachelor of Design",
+  },
+  {
+    key: "b.ed.",
+    text: "Bachelor of Education",
+    value: "Bachelor of Education",
+  },
+  {
+    key: "b.e./b.tech.",
+    text: "Bachelor of Engineering / Bachelor of Technology",
+    value: "Bachelor of Engineering / Bachelor of Technology",
+  },
+  {
+    key: "bfa/bva",
+    text: "Bachelor of Fine Arts",
+    value: "Bachelor of Fine Arts",
+  },
+  {
+    key: "b.f.sc./b.sc.(fisheries).",
+    text: "Bachelor of Fisheries Science",
+    value: "Bachelor of Fisheries Science",
+  },
+  {
+    key: "b.h.m.s.",
+    text: "Bachelor of Homoeopathic Medicine and Surgery",
+    value: "Bachelor of Homoeopathic Medicine and Surgery",
+  },
+  { key: "l.l.b.", text: "Bachelor of Laws", value: "Bachelor of Laws" },
+  {
+    key: "b.lib./b.lib.sc.",
+    text: "Bachelor of Library Science",
+    value: "Bachelor of Library Science",
+  },
+  {
+    key: "b.m.c./b.m.m.",
+    text: "Bachelor of Mass Communications",
+    value: "Bachelor of Mass Communications",
+  },
+  {
+    key: "m.b.b.s.",
+    text: "Bachelor of Medicine and Bachelor of Surgery",
+    value: "Bachelor of Medicine and Bachelor of Surgery",
+  },
+  { key: "b.nur.", text: "Bachelor of Nursing", value: "Bachelor of Nursing" },
+  {
+    key: "b.pharm/b.pharma.",
+    text: "Bachelor of Pharmacy",
+    value: "Bachelor of Pharmacy",
+  },
+  {
+    key: "b.p.ed.",
+    text: "Bachelor of Physical Education",
+    value: "Bachelor of Physical Education",
+  },
+  {
+    key: "b.p.t.",
+    text: "Bachelor of Physiotherapy",
+    value: "Bachelor of Physiotherapy",
+  },
+  { key: "b.sc.", text: "Bachelor of Science", value: "Bachelor of Science" },
+  {
+    key: "bsw/b.a.(sw)",
+    text: "Bachelor of Social Work",
+    value: "Bachelor of Social Work",
+  },
+  {
+    key: "b.v.sc.&a.h./b.v.sc",
+    text: "Bachelor of Veterinary Science and Animal Husbandry",
+    value: "Bachelor of Veterinary Science and Animal Husbandry",
+  },
+  { key: "m.d.", text: "Doctor of Medicine", value: "Doctor of Medicine" },
+  {
+    key: "m.d.(homoeopathy)",
+    text: "Doctor of Medicine in Homoeopathy",
+    value: "Doctor of Medicine in Homoeopathy",
+  },
+  { key: "pharm.d", text: "Doctor of Pharmacy", value: "Doctor of Pharmacy" },
+  { key: "ph.d.", text: "Doctor of Philosophy", value: "Doctor of Philosophy" },
+  {
+    key: "d.m.",
+    text: "Doctorate of Medicine",
+    value: "Doctorate of Medicine",
+  },
+  {
+    key: "m.arch.",
+    text: "Master of Architecture",
+    value: "Master of Architecture",
+  },
+  { key: "m.a.", text: "Master of Arts", value: "Master of Arts" },
+  {
+    key: "m.b.a.",
+    text: "Master of Business Administration",
+    value: "Master of Business Administration",
+  },
+  { key: "m.ch.", text: "Master of Chirurgiae", value: "Master of Chirurgiae" },
+  { key: "m.com.", text: "Master of Commerce", value: "Master of Commerce" },
+  {
+    key: "m.c.a.",
+    text: "Master of Computer Applications",
+    value: "Master of Computer Applications",
+  },
+  {
+    key: "m.d.s.",
+    text: "Master of Dental Surgery",
+    value: "Master of Dental Surgery",
+  },
+  {
+    key: "m.des./m.design.",
+    text: "Master of Design",
+    value: "Master of Design",
+  },
+  { key: "m.ed.", text: "Master of Education", value: "Master of Education" },
+  {
+    key: "m.e./m.tech.",
+    text: "Master of Engineering / Master of Technology",
+    value: "Master of Engineering / Master of Technology",
+  },
+  { key: "mfa/mva", text: "Master of Fine Arts", value: "Master of Fine Arts" },
+  { key: "l.l.m.", text: "Master of Laws", value: "Master of Laws" },
+  {
+    key: "m.lib./m.lib.sc.",
+    text: "Master of Library Science",
+    value: "Master of Library Science",
+  },
+  {
+    key: "m.m.c/m.m.m.",
+    text: "Master of Mass Communications / Mass Media",
+    value: "Master of Mass Communications / Mass Media",
+  },
+  { key: "m.pharm", text: "Master of Pharmacy", value: "Master of Pharmacy" },
+  {
+    key: "m.phil.",
+    text: "Master of Philosophy",
+    value: "Master of Philosophy",
+  },
+  {
+    key: "m.p.ed./m.p.e.",
+    text: "Master of Physical Education",
+    value: "Master of Physical Education",
+  },
+  {
+    key: "m.p.t.",
+    text: "Master of Physiotherapy",
+    value: "Master of Physiotherapy",
+  },
+  { key: "m.sc.", text: "Master of Science", value: "Master of Science" },
+  {
+    key: "m.s.w./m.a.(sw)",
+    text: "Master of Social Work / Master of Arts in Social Work",
+    value: "Master of Social Work / Master of Arts in Social Work",
+  },
+  {
+    key: "m.sc.(agriculture)",
+    text: "Master of Science in Agriculture",
+    value: "Master of Science in Agriculture",
+  },
+  { key: "m.s.", text: "Master of Surgery", value: "Master of Surgery" },
+  {
+    key: "m.v.sc.",
+    text: "Master of Veterinary Science",
+    value: "Master of Veterinary Science",
+  },
+];

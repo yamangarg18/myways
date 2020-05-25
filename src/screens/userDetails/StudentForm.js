@@ -8,7 +8,7 @@ import StudentProfile from "./StudentProfileLinks";
 import Achievement from "./Achievement";
 import Courses from "./Courses";
 import { sendStudentProfile } from "../../actions/student";
-import { history } from "../../routers/AppRouter";
+// import { history } from "../../routers/AppRouter";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import StudentAvailability from "./StudentAvailability";
@@ -65,34 +65,34 @@ const StudentForm = () => {
   };
 
   const prevStep = () => {
-    if (step - 1 <= 0) history.push("/dashboard");
+    if (step - 1 <= 0) navigation.navigate("dashboard");
     else setStep(step - 1);
   };
 
-  const sendDataToMLServer = (values) => {
-    let user_id = localStorage.user_id;
-    console.log(user_id);
-    let college_id = localStorage.college_id.split(",");
-    let link = `${process.env.REACT_APP_ML_URL}/save_user`;
-    const postData = {
-      college_id: college_id,
-      intern_id: user_id,
-      courses_data: values.courses,
-      experience_data: values.experiences,
-      education_data: values.education,
-      projects_data: values.projects,
-      skills: values.skills.present,
-      aspirational_skills: values.skills.aspirational_skills,
-    };
-    axios
-      .post(link, { ...postData })
-      .then((data) => {
-        console.log("save_user ML Server :- ", data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const sendDataToMLServer = (values) => {
+  //   let user_id = localStorage.user_id;
+  //   console.log(user_id);
+  //   let college_id = localStorage.college_id.split(",");
+  //   let link = `${process.env.REACT_APP_ML_URL}/save_user`;
+  //   const postData = {
+  //     college_id: college_id,
+  //     intern_id: user_id,
+  //     courses_data: values.courses,
+  //     experience_data: values.experiences,
+  //     education_data: values.education,
+  //     projects_data: values.projects,
+  //     skills: values.skills.present,
+  //     aspirational_skills: values.skills.aspirational_skills,
+  //   };
+  //   axios
+  //     .post(link, { ...postData })
+  //     .then((data) => {
+  //       console.log("save_user ML Server :- ", data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const currentForm = () => {
     switch (step) {

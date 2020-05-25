@@ -21,11 +21,11 @@ export const addTests = (tests) => ({
   tests,
 });
 
-// this stores all the questions of the current test
-export const currentTest = (questions) => ({
-  type: CURRENT_TEST,
-  questions,
-});
+// // this stores all the questions of the current test
+// export const currentTest = (questions) => ({
+//   type: CURRENT_TEST,
+//   questions,
+// });
 
 // // I dont think If I use this anymore but I'm gonna let it stay here.
 // export const currentAnswers = (answers) => ({
@@ -95,18 +95,18 @@ export const startAddTests = () => {
   };
 };
 // api call to get the questions for the selected test
-export const getCurrentTest = () => {
-  return (dispatch) => {
-    return axios
-      .get(`http://ee06364f.ngrok.io/api/test/workOrientation`)
-      .then((res) => {
-        dispatch(currentTest(res.data.questions.questions));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
+// export const getCurrentTest = () => {
+//   return (dispatch) => {
+//     return axios
+//       .get(`http://ee06364f.ngrok.io/api/test/workOrientation`)
+//       .then((res) => {
+//         dispatch(currentTest(res.data.questions.questions));
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
+// };
 
 // // export const getCurrentTest = (testName = "interestTest") => {
 // //     return (dispatch, getState) => {

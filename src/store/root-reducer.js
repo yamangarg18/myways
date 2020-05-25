@@ -24,7 +24,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  // auth: authReducer,
+  auth: authReducer,
   // sideMenu: SideMenu.reducer,
   // searchStore: SearchStore.reducer,
   // filters: filterReducer,
