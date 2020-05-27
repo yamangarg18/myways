@@ -230,7 +230,7 @@ const Expectation = () => {
             <button className={`${styles.radio} ${styles["button-select"]}`}>
               <input
                 // ref={radioRef1}
-                type='checkbox'
+                type="checkbox"
                 id={`${option.optionNumber}`}
                 name={`radio${option.optionNumber}`}
                 value={option.option}
@@ -301,22 +301,22 @@ const Expectation = () => {
         </div>
       ) : (
         <>
-          <Link className='goto-dashboard' to='/careerProfile'>
+          <Link className="goto-dashboard" to="/careerProfile">
             <FontAwesomeIcon icon={faArrowLeft} />
           </Link>
           <Progress completed={progress} color={"#FFC765"} />
-          <div title='elapsed time' className='test-timer'>
+          <div title="elapsed time" className="test-timer">
             <Timer />
           </div>
-          <div className='test__item2'>
+          <div className="test__item2">
             {isTestCompleted ? (
-              <div className='test-feedback'>
-                <h2 className='test__title'>
+              <div className="test-feedback">
+                <h2 className="test__title">
                   Are you sure you want to finish this test?
                 </h2>
-                <div className='stars'>
+                <div className="stars">
                   <button
-                    className='button-form'
+                    className="button-form"
                     onClick={(e) => {
                       setIsTestCompleted(false);
                       setNextDisabled(false);
@@ -324,7 +324,7 @@ const Expectation = () => {
                   >
                     No
                   </button>
-                  <button className='button-form' onClick={handleSubmitTest}>
+                  <button className="button-form" onClick={handleSubmitTest}>
                     Submit
                   </button>
                 </div>
@@ -333,7 +333,7 @@ const Expectation = () => {
               <>
                 {questions.length > 0 ? (
                   <>
-                    <div className='test__sub-question'>
+                    <div className="test__sub-question">
                       <h2>
                         {
                           questions[questionType].questionSet[
@@ -347,26 +347,26 @@ const Expectation = () => {
                         ? renderOptions(firstPageOptions)
                         : renderOptions(secondPageOptions)}
                     </div>
-                    <div className='d-flex flex-column'>
-                      <div className='d-flex'>
+                    <div className="d-flex flex-column">
+                      <div className="d-flex">
                         <button
                           ref={left}
-                          className='button button-left ml-auto mr-5'
+                          className="button button-left ml-auto mr-5"
                           onClick={handlePrevious}
                           disabled={previousDisabled}
                         >
-                          <FontAwesomeIcon icon={faArrowLeft} size='2x' />
+                          <FontAwesomeIcon icon={faArrowLeft} size="2x" />
                         </button>
                         <button
                           ref={right}
-                          className='button button-right mr-auto ml-5'
+                          className="button button-right mr-auto ml-5"
                           onClick={handleNext}
                           disabled={nextDisabled}
                         >
-                          <FontAwesomeIcon icon={faArrowRight} size='2x' />
+                          <FontAwesomeIcon icon={faArrowRight} size="2x" />
                         </button>
                       </div>
-                      <h3 className='font-weight-light m-2 align-self-center'>
+                      <h3 className="font-weight-light m-2 align-self-center">
                         Use keyboard arrows to navigate
                       </h3>
                     </div>
@@ -382,8 +382,26 @@ const Expectation = () => {
 };
 
 export default Expectation;
-<View>
-  {currentTypeQuestion === 0
-    ? renderOptions(firstPageOptions)
-    : renderOptions(secondPageOptions)}
-</View>;
+<button>
+  <input
+    // ref={radioRef1}
+    type="checkbox"
+    id={`${option.optionNumber}`}
+    name={`radio${option.optionNumber}`}
+    value={option.option}
+    checked={
+      currentTypeQuestion === 0
+        ? firstPageOptionsSelected.includes(option.optionNumber)
+          ? true
+          : false
+        : secondPageOptionsSelected.includes(option.optionNumber)
+        ? true
+        : false
+    }
+    onChange={handleOptionChange}
+  />
+  <label htmlFor={`${option.optionNumber}`}>
+    <View className={`${styles.checker}`}></View>
+    {option.option}
+  </label>
+</button>;
