@@ -4,7 +4,7 @@ import { persistReducer } from "redux-persist";
 // import AsyncStorage from "@react-native-community/async-storage";
 import { AsyncStorage } from "react-native";
 
-// import authReducer from "../reducers/auth";
+import authReducer from "../reducers/auth";
 // import filterReducer from "../reducers/filters";
 // import * as SearchStore from "./SearchStore";
 // import * as SideMenu from "./SideMenu";

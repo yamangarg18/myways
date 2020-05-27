@@ -188,7 +188,7 @@ const ExpectationScreen = ({ navigation }) => {
   console.log(firstPageOptions, "bye2");
 
   const handlePrevious = () => {
-    if (totalQuestions >= currentQuestion && currentQuestion !== 1) {
+    if (totalQuestions >= currentQuestion && !previousDisabled) {
       if (questions[questionType] !== undefined) {
         //when array contains these question types
         if (
@@ -214,7 +214,7 @@ const ExpectationScreen = ({ navigation }) => {
         }
       }
     } else {
-      if (currentQuestion == 1) {
+      if (previousDisabled) {
         navigation.navigate("Instructions", { id: "expectation" });
       }
     }
@@ -299,31 +299,9 @@ const ExpectationScreen = ({ navigation }) => {
     if (options.length > 0) {
       return (
         <View>
-          {options.map((option) => (
-            <button>
-              <input
-                // ref={radioRef1}
-                type='checkbox'
-                id={`${option.optionNumber}`}
-                name={`radio${option.optionNumber}`}
-                value={option.option}
-                checked={
-                  currentTypeQuestion === 0
-                    ? firstPageOptionsSelected.includes(option.optionNumber)
-                      ? true
-                      : false
-                    : secondPageOptionsSelected.includes(option.optionNumber)
-                    ? true
-                    : false
-                }
-                onChange={handleOptionChange}
-              />
-              <label htmlFor={`${option.optionNumber}`}>
-                <View className={`${styles.checker}`}></View>
-                {option.option}
-              </label>
-            </button>
-          ))}
+          {options.map((option) => {
+            return <Text style={styles.text2}>{option.option}</Text>;
+          })}
         </View>
       );
     }
@@ -364,13 +342,13 @@ const ExpectationScreen = ({ navigation }) => {
           </Text>
           <View style={styles.navigationContainer}>
             <Button
-              title='No '
+              title="No "
               onPress={() => {
                 setIsTestCompleted(false);
                 setNextDisabled(false);
               }}
             />
-            <Button title='Submit ' onPress={() => handleSubmitTest()} />
+            <Button title="Submit " onPress={() => handleSubmitTest()} />
           </View>
         </View>
       ) : (
@@ -383,15 +361,21 @@ const ExpectationScreen = ({ navigation }) => {
                     .question
                 }
               </Text>
+              <View>
+                {currentTypeQuestion === 0
+                  ? renderOptions(firstPageOptions)
+                  : renderOptions(secondPageOptions)}
+              </View>
+
               <View style={styles.navigationContainer}>
                 <Button
                   style={styles.navigationButton}
-                  title='Previous '
+                  title="Previous "
                   onPress={() => handlePrevious()}
                 />
                 <Button
                   style={styles.navigationButton}
-                  title='Next'
+                  title="Next"
                   onPress={() => handleNext()}
                 />
               </View>
@@ -455,7 +439,7 @@ const styles = StyleSheet.create({
   text2: {
     color: "black",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 15,
     marginTop: 20,
     marginHorizontal: 10,
   },
