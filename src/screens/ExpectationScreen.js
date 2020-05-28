@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
+  List,
+  ListItem,
+  Text as Text1,
+  Body,
+  Container,
+  Root,
+  Content,
+} from "native-base";
+import {
   View,
   StyleSheet,
   Text,
@@ -9,7 +18,11 @@ import {
   Button,
   FlatList,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+
 import { REACT_APP_BASE_URL } from "react-native-dotenv";
+import { CheckBox } from "react-native-elements";
+import { FontAwesome } from "@expo/vector-icons";
 
 const ExpectationScreen = ({ navigation }) => {
   const test = [
@@ -122,6 +135,9 @@ const ExpectationScreen = ({ navigation }) => {
     []
   );
 
+  const [firstSelected, setFirstSelected] = useState([]);
+  const [secondSelected, setSecondSelected] = useState([]);
+
   const [alreadyTaken, setAlreadyTaken] = useState(false);
 
   //   useEffect(() => {
@@ -167,6 +183,9 @@ const ExpectationScreen = ({ navigation }) => {
             return ques;
           });
         });
+        const options = res[0].questionSet[0].options;
+        let response = new Array(options.length).fill(0);
+        setFirstSelected(response);
         setQuestions(res);
         setTotalQuestions(totalQues);
         setFirstPageOptions(res[0].questionSet[0].options);
@@ -181,11 +200,18 @@ const ExpectationScreen = ({ navigation }) => {
     if (questions.length === 0 && !alreadyTaken) {
       getQuestions();
     }
-  }, [questions, totalQuestions, firstPageOptions, alreadyTaken]);
+  }, [
+    questions,
+    totalQuestions,
+    firstPageOptions,
+    firstSelected,
+    alreadyTaken,
+  ]);
 
-  console.log(questions, "hi2");
-  console.log(totalQuestions, "hello2");
-  console.log(firstPageOptions, "bye2");
+  // console.log(questions, "hi2");
+  // console.log(totalQuestions, "hello2");
+  // console.log(firstPageOptions, "bye2");
+  // console.log(firstSelected);
 
   const handlePrevious = () => {
     if (totalQuestions >= currentQuestion && !previousDisabled) {
@@ -201,6 +227,7 @@ const ExpectationScreen = ({ navigation }) => {
           setSecondPageOptionsSelected([]);
 
           setNextDisabled(false);
+          setPreviousDisabled(true);
         } else {
           //check if there are more types
           if (questions[questionType - 1] !== undefined) {
@@ -210,6 +237,7 @@ const ExpectationScreen = ({ navigation }) => {
             );
             setCurrentQuestion(currentQuestion - 1);
             setNextDisabled(false);
+            setPreviousDisabled(true);
           }
         }
       }
@@ -237,7 +265,10 @@ const ExpectationScreen = ({ navigation }) => {
                 newOptions.push(option);
               }
             });
-
+            if (secondSelected.length === 0) {
+              let response = new Array(newOptions.length).fill(0);
+              setSecondSelected(response);
+            }
             setSecondPageOptions(newOptions);
             // setSecondPageOptionsSelected([]);
             setCurrentQuestion(currentQuestion + 1);
@@ -266,29 +297,56 @@ const ExpectationScreen = ({ navigation }) => {
     }
   };
 
-  const handleOptionChange = (e) => {
+  const handleOptionChange = (optionNumber) => {
     if (currentTypeQuestion === 0) {
       let newOptions = [...firstPageOptionsSelected];
-      if (newOptions.includes(e.target.id)) {
-        newOptions.splice(newOptions.indexOf(e.target.id), 1);
+      if (newOptions.includes(optionNumber)) {
+        newOptions.splice(newOptions.indexOf(optionNumber), 1);
+        let newSelected = [...firstSelected];
+        {
+          firstSelected[optionNumber - 1] === 0
+            ? (newSelected[optionNumber - 1] = 1)
+            : (newSelected[optionNumber - 1] = 0);
+        }
+        setFirstSelected(newSelected);
       } else {
         if (newOptions.length === 2) {
           alert("select only 2 options");
         } else {
-          newOptions.push(e.target.id);
+          newOptions.push(optionNumber);
+          let newSelected = [...firstSelected];
+          {
+            firstSelected[optionNumber - 1] === 0
+              ? (newSelected[optionNumber - 1] = 1)
+              : (newSelected[optionNumber - 1] = 0);
+          }
+          setFirstSelected(newSelected);
         }
       }
       setFirstPageOptionsSelected(newOptions);
-    }
-    if (currentTypeQuestion === 1) {
+    } else if (currentTypeQuestion === 1) {
       let newOptions = [...secondPageOptionsSelected];
-      if (newOptions.includes(e.target.id)) {
-        newOptions.splice(newOptions.indexOf(e.target.id), 1);
+      if (newOptions.includes(optionNumber)) {
+        newOptions.splice(newOptions.indexOf(optionNumber), 1);
+        let newSelected = [...secondSelected];
+        {
+          secondSelected[optionNumber - 1] === 0
+            ? (newSelected[optionNumber - 1] = 1)
+            : (newSelected[optionNumber - 1] = 0);
+        }
+        setSecondSelected(newSelected);
       } else {
         if (newOptions.length === 2) {
           alert("select only 2 options");
         } else {
-          newOptions.push(e.target.id);
+          newOptions.push(optionNumber);
+          let newSelected = [...secondSelected];
+          {
+            secondSelected[optionNumber - 1] === 0
+              ? (newSelected[optionNumber - 1] = 1)
+              : (newSelected[optionNumber - 1] = 0);
+          }
+          setSecondSelected(newSelected);
         }
       }
       setSecondPageOptionsSelected(newOptions);
@@ -297,17 +355,73 @@ const ExpectationScreen = ({ navigation }) => {
 
   const renderOptions = (options) => {
     if (options.length > 0) {
-      return (
-        <View>
-          {options.map((option) => {
-            return <Text style={styles.text2}>{option.option}</Text>;
-          })}
-        </View>
-      );
+      if (currentTypeQuestion === 0) {
+        return (
+          <View>
+            <FlatList
+              data={options}
+              keyExtractor={(option) => option.option}
+              renderItem={({ item }) => {
+                const [iconName] =
+                  firstSelected[item.optionNumber - 1] === 1
+                    ? ["dot-circle-o"]
+                    : ["circle-o"];
+                return (
+                  <TouchableOpacity
+                    onPress={() => handleOptionChange(item.optionNumber)}
+                  >
+                    <View
+                      style={
+                        firstSelected[item.optionNumber - 1] === 1
+                          ? styles.row3
+                          : styles.row2
+                      }
+                    >
+                      <FontAwesome name={iconName} style={styles.icon} />
+                      <Text style={styles.text2}>{item.option}</Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+        );
+      } else if (currentTypeQuestion === 1) {
+        return (
+          <View>
+            <FlatList
+              data={options}
+              keyExtractor={(option) => option.option}
+              renderItem={({ item }) => {
+                const [iconName] =
+                  secondSelected[item.optionNumber - 1] === 1
+                    ? ["dot-circle-o"]
+                    : ["circle-o"];
+                return (
+                  <TouchableOpacity
+                    onPress={() => handleOptionChange(item.optionNumber)}
+                  >
+                    <View
+                      style={
+                        secondSelected[item.optionNumber - 1] === 1
+                          ? styles.row3
+                          : styles.row2
+                      }
+                    >
+                      <FontAwesome name={iconName} style={styles.icon} />
+                      <Text style={styles.text2}>{item.option}</Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+        );
+      }
     }
   };
 
-  const handleSubmitTest = async (e) => {
+  const handleSubmitTest = async () => {
     let firstOptions = [...firstPageOptionsSelected],
       secondOptions = [...secondPageOptionsSelected],
       allOptions = [...firstPageOptions];
@@ -354,32 +468,33 @@ const ExpectationScreen = ({ navigation }) => {
       ) : (
         <>
           {questions.length > 0 ? (
-            <View>
-              <Text style={styles.text1}>
-                {
-                  questions[questionType].questionSet[currentTypeQuestion]
-                    .question
-                }
-              </Text>
+            <ScrollView>
               <View>
-                {currentTypeQuestion === 0
-                  ? renderOptions(firstPageOptions)
-                  : renderOptions(secondPageOptions)}
+                <Text style={styles.text1}>
+                  {
+                    questions[questionType].questionSet[currentTypeQuestion]
+                      .question
+                  }
+                </Text>
+                <View>
+                  {currentTypeQuestion === 0
+                    ? renderOptions(firstPageOptions)
+                    : renderOptions(secondPageOptions)}
+                </View>
+                <View style={styles.navigationContainer}>
+                  <Button
+                    style={styles.navigationButton}
+                    title="Previous "
+                    onPress={() => handlePrevious()}
+                  />
+                  <Button
+                    style={styles.navigationButton}
+                    title="Next"
+                    onPress={() => handleNext()}
+                  />
+                </View>
               </View>
-
-              <View style={styles.navigationContainer}>
-                <Button
-                  style={styles.navigationButton}
-                  title="Previous "
-                  onPress={() => handlePrevious()}
-                />
-                <Button
-                  style={styles.navigationButton}
-                  title="Next"
-                  onPress={() => handleNext()}
-                />
-              </View>
-            </View>
+            </ScrollView>
           ) : null}
         </>
       )}
@@ -433,15 +548,17 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     fontSize: 20,
-    marginVertical: 40,
+    marginVertical: 20,
     marginHorizontal: 10,
   },
   text2: {
     color: "black",
-    textAlign: "center",
+    // textAlign: "center",
     fontSize: 15,
-    marginTop: 20,
     marginHorizontal: 10,
+
+    // marginTop: 20,
+    // marginHorizontal: 10,
   },
   navigationContainer: {
     flexDirection: "row",
@@ -472,6 +589,31 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     paddingHorizontal: 10,
   },
+  row2: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 2,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: "gray",
+    marginHorizontal: 5,
+    alignItems: "center",
+    paddingHorizontal: 5,
+    borderRadius: 30,
+  },
+  row3: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 2,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: "gray",
+    marginHorizontal: 5,
+    alignItems: "center",
+    paddingHorizontal: 5,
+    borderRadius: 30,
+    backgroundColor: "yellow",
+  },
   title: {
     fontSize: 18,
     marginBottom: 5,
@@ -479,6 +621,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24,
+    marginVertical: 10,
   },
   mainContainer: {
     // flex: 1,
@@ -496,6 +639,9 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     resizeMode: "cover",
+  },
+  icon: {
+    fontSize: 15,
   },
 });
 
