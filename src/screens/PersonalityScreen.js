@@ -10,9 +10,10 @@ import {
   FlatList,
 } from "react-native";
 import { REACT_APP_BASE_URL } from "react-native-dotenv";
+import { FontAwesome } from "@expo/vector-icons";
 
 const PersonalityScreen = ({ navigation }) => {
-  test1 = [
+  const test1 = [
     {
       questionNumber: "1120",
       question: "in your dealings you",
@@ -573,6 +574,8 @@ const PersonalityScreen = ({ navigation }) => {
 
   const [alreadyTaken, setAlreadyTaken] = useState(false);
 
+  const [selected, setSelected] = useState(false);
+
   // useEffect(() => {
   //   const getQuestions = async () => {
   //     try {
@@ -623,21 +626,24 @@ const PersonalityScreen = ({ navigation }) => {
     if (questions.length === 0 && !alreadyTaken) getQuestions();
   }, [questions, type, totalQuestions, answers, alreadyTaken]);
 
-  console.log(questions, "hi4");
-  console.log(type, "heyaa4");
-  console.log(totalQuestions, "hello4");
-  console.log(answers, "bye4");
+  // console.log(questions, "hi4");
+  // console.log(type, "heyaa4");
+  // console.log(totalQuestions, "hello4");
+  // console.log(answers, "bye4");
 
   const handlePrevious = () => {
-    console.log(currentQuestion);
-    e.preventDefault();
-    if (totalQuestions >= currentQuestion) {
+    if (totalQuestions >= currentQuestion && currentQuestion !== 1) {
       if (currentQuestion - 1 !== 0) {
         setCurrentQuestion(currentQuestion - 1);
         setNextDisabled(false);
       }
+    } else {
+      if (currentQuestion == 1) {
+        navigation.navigate("Instructions", { id: "personality" });
+      }
     }
   };
+
   const handleNext = () => {
     if (totalQuestions !== currentQuestion) {
       if (questions[currentQuestion] !== undefined) {
@@ -661,51 +667,49 @@ const PersonalityScreen = ({ navigation }) => {
     }
   };
 
-  const handleOption = () => {
+  const handleOption = (optionNumber) => {
     let newAnswers = [...answers];
-    console.log(e.target.id);
-    newAnswers[currentQuestion - 1].answer = e.target.id;
+    console.log(optionNumber);
+    newAnswers[currentQuestion - 1].answer = optionNumber;
     setAnswers(newAnswers);
-    if (right.current !== null) {
-      right.current.click();
-    }
   };
 
   const renderOptions = (options) => {
     if (answers.length > 0) {
       return (
-        <div className={`${styles.radios}`}>
-          {options.map((option, index) => (
-            <button
-              htmlFor={`${option.optionNumber}`}
-              className={`${styles.radio} ${styles["button-select"]}`}
-            >
-              <input
-                type='radio'
-                id={`${option.optionNumber}`}
-                name={`radio${option.optionNumber}`}
-                value={option.option}
-                checked={
-                  answers[currentQuestion - 1].answer ===
-                  String(option.optionNumber)
-                    ? true
-                    : false
-                }
-                onChange={handleOption}
-              />
-              <label htmlFor={`${option.optionNumber}`}>
-                <div className={`${styles.checker}`}></div>
-                {option.option}
-              </label>
-            </button>
-          ))}
-        </div>
+        <View>
+          <FlatList
+            data={options}
+            keyExtractor={(option) => option.option}
+            renderItem={({ item }) => {
+              const [iconName] =
+                answers[currentQuestion - 1].answer === item.optionNumber
+                  ? ["dot-circle-o"]
+                  : ["circle-o"];
+              return (
+                <TouchableOpacity
+                  onPress={() => handleOption(item.optionNumber)}
+                >
+                  <View
+                    style={
+                      answers[currentQuestion - 1].answer === item.optionNumber
+                        ? styles.row3
+                        : styles.row2
+                    }
+                  >
+                    <FontAwesome name={iconName} style={styles.icon} />
+                    <Text style={styles.text2}>{item.option}</Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </View>
       );
     }
   };
 
   const handleSubmitTest = async (e) => {
-    e.preventDefault();
     if (type === 1) {
       setisLoading(true);
       try {
@@ -758,31 +762,34 @@ const PersonalityScreen = ({ navigation }) => {
           </Text>
           <View style={styles.navigationContainer}>
             <Button
-              title='No '
+              title="No "
               onPress={() => {
                 setIsTestCompleted(false);
                 setNextDisabled(false);
               }}
             />
-            <Button title='Submit ' onPress={() => handleSubmitTest()} />
+            <Button title="Submit " onPress={() => handleSubmitTest()} />
           </View>
         </View>
       ) : (
         <>
           {questions.length > 0 ? (
-            <View>
+            <View style={styles.container1}>
               <Text style={styles.text1}>
                 {questions[currentQuestion - 1].question}
               </Text>
+              <View>
+                {renderOptions(questions[currentQuestion - 1].options)}
+              </View>
               <View style={styles.navigationContainer}>
                 <Button
                   style={styles.navigationButton}
-                  title='Previous '
+                  title="Previous "
                   onPress={() => handlePrevious()}
                 />
                 <Button
                   style={styles.navigationButton}
-                  title='Next'
+                  title="Next"
                   onPress={() => handleNext()}
                 />
               </View>
@@ -794,11 +801,17 @@ const PersonalityScreen = ({ navigation }) => {
   );
 };
 
+PersonalityScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
+};
+
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
     justifyContent: "center",
-
+    marginBottom: 100,
     // flexDirection: "row",
     // marginVertical: 50,
     // marginHorizontal: 30,
@@ -839,15 +852,15 @@ const styles = StyleSheet.create({
   text1: {
     color: "black",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 30,
     marginVertical: 40,
     marginHorizontal: 10,
   },
   text2: {
     color: "black",
-    textAlign: "center",
-    fontSize: 20,
-    marginTop: 20,
+    // textAlign: "center",
+    fontSize: 15,
+    // marginTop: 20,
     marginHorizontal: 10,
   },
   navigationContainer: {
@@ -878,6 +891,35 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderColor: "gray",
     paddingHorizontal: 10,
+  },
+  row2: {
+    flexDirection: "row",
+    // justifyContent: "space-between",
+    paddingVertical: 2,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: "gray",
+    marginHorizontal: 5,
+    alignItems: "center",
+    paddingHorizontal: 10,
+    borderRadius: 20,
+  },
+  row3: {
+    flexDirection: "row",
+    // justifyContent: "space-between",
+    paddingVertical: 2,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: "gray",
+    marginHorizontal: 5,
+    alignItems: "center",
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    backgroundColor: "yellow",
+  },
+  icon: {
+    fontSize: 24,
+    marginVertical: 10,
   },
   title: {
     fontSize: 18,

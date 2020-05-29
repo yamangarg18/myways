@@ -214,7 +214,7 @@ const ExpectationScreen = ({ navigation }) => {
   // console.log(firstSelected);
 
   const handlePrevious = () => {
-    if (totalQuestions >= currentQuestion && !previousDisabled) {
+    if (totalQuestions >= currentQuestion && currentQuestion !== 1) {
       if (questions[questionType] !== undefined) {
         //when array contains these question types
         if (
@@ -227,7 +227,6 @@ const ExpectationScreen = ({ navigation }) => {
           setSecondPageOptionsSelected([]);
 
           setNextDisabled(false);
-          setPreviousDisabled(true);
         } else {
           //check if there are more types
           if (questions[questionType - 1] !== undefined) {
@@ -237,12 +236,11 @@ const ExpectationScreen = ({ navigation }) => {
             );
             setCurrentQuestion(currentQuestion - 1);
             setNextDisabled(false);
-            setPreviousDisabled(true);
           }
         }
       }
     } else {
-      if (previousDisabled) {
+      if (currentQuestion == 1) {
         navigation.navigate("Instructions", { id: "expectation" });
       }
     }
@@ -500,6 +498,12 @@ const ExpectationScreen = ({ navigation }) => {
       )}
     </>
   );
+};
+
+ExpectationScreen.navigationOptions = () => {
+  return {
+    headerShown: false,
+  };
 };
 
 const styles = StyleSheet.create({

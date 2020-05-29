@@ -158,7 +158,7 @@ const Personality = () => {
               className={`${styles.radio} ${styles["button-select"]}`}
             >
               <input
-                type='radio'
+                type="radio"
                 id={`${option.optionNumber}`}
                 name={`radio${option.optionNumber}`}
                 value={option.option}
@@ -241,22 +241,22 @@ const Personality = () => {
         </div>
       ) : (
         <>
-          <Link className='goto-dashboard' to='/careerProfile'>
+          <Link className="goto-dashboard" to="/careerProfile">
             <FontAwesomeIcon icon={faArrowLeft} />
           </Link>
           <Progress completed={progress} color={"#FFC765"} />
-          <div title='elapsed time' className='test-timer'>
+          <div title="elapsed time" className="test-timer">
             <Timer />
           </div>
-          <div className='test__item'>
+          <div className="test__item">
             {isTestCompleted ? (
-              <div className='test-feedback'>
-                <h2 className='test__title'>
+              <div className="test-feedback">
+                <h2 className="test__title">
                   Are you sure you want to finish this test?
                 </h2>
-                <div className='stars'>
+                <div className="stars">
                   <button
-                    className='button-form'
+                    className="button-form"
                     onClick={(e) => {
                       setIsTestCompleted(false);
                       setNextDisabled(false);
@@ -264,7 +264,7 @@ const Personality = () => {
                   >
                     No
                   </button>
-                  <button className='button-form' onClick={handleSubmitTest}>
+                  <button className="button-form" onClick={handleSubmitTest}>
                     Submit
                   </button>
                 </div>
@@ -273,32 +273,32 @@ const Personality = () => {
               <>
                 {questions.length > 0 ? (
                   <>
-                    <div className='test__paragraph'>
+                    <div className="test__paragraph">
                       <h2>{questions[currentQuestion - 1].question}</h2>
                     </div>
                     <div className={`${styles.question}`}>
                       {renderOptions(questions[currentQuestion - 1].options)}
                     </div>
-                    <div className='d-flex flex-column'>
-                      <div className='d-flex'>
+                    <div className="d-flex flex-column">
+                      <div className="d-flex">
                         <button
                           ref={left}
-                          className='button button-left ml-auto mr-5'
+                          className="button button-left ml-auto mr-5"
                           onClick={handlePrevious}
                           disabled={previousDisabled}
                         >
-                          <FontAwesomeIcon icon={faArrowLeft} size='2x' />
+                          <FontAwesomeIcon icon={faArrowLeft} size="2x" />
                         </button>
                         <button
                           ref={right}
-                          className='button button-right mr-auto ml-5'
+                          className="button button-right mr-auto ml-5"
                           onClick={handleNext}
                           disabled={nextDisabled}
                         >
-                          <FontAwesomeIcon icon={faArrowRight} size='2x' />
+                          <FontAwesomeIcon icon={faArrowRight} size="2x" />
                         </button>
                       </div>
-                      <h3 className='font-weight-light m-2 align-self-center'>
+                      <h3 className="font-weight-light m-2 align-self-center">
                         Use keyboard arrows to navigate
                       </h3>
                     </div>
@@ -314,5 +314,28 @@ const Personality = () => {
 };
 
 export default Personality;
-
-<View>{renderOptions(questions[currentQuestion - 1].options)}</View>;
+<div className={`${styles.radios}`}>
+  {options.map((option, index) => (
+    <button
+      htmlFor={`${option.optionNumber}`}
+      className={`${styles.radio} ${styles["button-select"]}`}
+    >
+      <input
+        type="radio"
+        id={`${option.optionNumber}`}
+        name={`radio${option.optionNumber}`}
+        value={option.option}
+        checked={
+          answers[currentQuestion - 1].answer === String(option.optionNumber)
+            ? true
+            : false
+        }
+        onChange={handleOption}
+      />
+      <label htmlFor={`${option.optionNumber}`}>
+        <div className={`${styles.checker}`}></div>
+        {option.option}
+      </label>
+    </button>
+  ))}
+</div>;
