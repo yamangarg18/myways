@@ -13,7 +13,7 @@ import authReducer from "../reducers/auth";
 // import internshipReducer from "../reducers/internship";
 import testReducer from "../reducers/test";
 // import ApplicantsData from "../reducers/applicants";
-// import otpModal from "../reducers/otpModal";
+import otpModal from "../reducers/otpModal";
 // import CareerInsight from "../reducers/careerInsightsModalData";
 // import StudentEditingModal from "../reducers/EditStudentProfile";
 
@@ -34,7 +34,7 @@ const rootReducer = combineReducers({
   test: testReducer,
   // careerInsight: CareerInsight,
   // applicants: ApplicantsData,
-  // otpModal: otpModal,
+  otpModal: otpModal,
   // StudentEditingModal: StudentEditingModal,
 });
 

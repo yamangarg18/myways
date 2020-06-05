@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
-  List,
-  ListItem,
-  Text as Text1,
-  Body,
-  Container,
-  Root,
-  Content,
-} from "native-base";
-import {
   View,
   StyleSheet,
   Text,
@@ -464,38 +455,38 @@ const ExpectationScreen = ({ navigation }) => {
           </View>
         </View>
       ) : (
-        <>
-          {questions.length > 0 ? (
-            <ScrollView>
-              <View>
-                <Text style={styles.text1}>
-                  {
-                    questions[questionType].questionSet[currentTypeQuestion]
-                      .question
-                  }
-                </Text>
+          <>
+            {questions.length > 0 ? (
+              <ScrollView>
                 <View>
-                  {currentTypeQuestion === 0
-                    ? renderOptions(firstPageOptions)
-                    : renderOptions(secondPageOptions)}
+                  <Text style={styles.text1}>
+                    {
+                      questions[questionType].questionSet[currentTypeQuestion]
+                        .question
+                    }
+                  </Text>
+                  <View>
+                    {currentTypeQuestion === 0
+                      ? renderOptions(firstPageOptions)
+                      : renderOptions(secondPageOptions)}
+                  </View>
+                  <View style={styles.navigationContainer}>
+                    <Button
+                      style={styles.navigationButton}
+                      title="Previous "
+                      onPress={() => handlePrevious()}
+                    />
+                    <Button
+                      style={styles.navigationButton}
+                      title="Next"
+                      onPress={() => handleNext()}
+                    />
+                  </View>
                 </View>
-                <View style={styles.navigationContainer}>
-                  <Button
-                    style={styles.navigationButton}
-                    title="Previous "
-                    onPress={() => handlePrevious()}
-                  />
-                  <Button
-                    style={styles.navigationButton}
-                    title="Next"
-                    onPress={() => handleNext()}
-                  />
-                </View>
-              </View>
-            </ScrollView>
-          ) : null}
-        </>
-      )}
+              </ScrollView>
+            ) : null}
+          </>
+        )}
     </>
   );
 };

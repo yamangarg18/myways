@@ -2,6 +2,7 @@ import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import SignupScreen from "./src/screens/SignupScreen";
+import Register from "./src/screens/RegisterFormScreen";
 import SigninScreen from "./src/screens/SigninScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import Stack from "./src/components/Drawer";
@@ -15,13 +16,13 @@ import { store } from "./src/store/store";
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
-    Signup: SignupScreen,
+    Signup: Register,
     Signin: SigninScreen,
   }),
   mainFlow: Stack,
 });
 
-const App = createAppContainer(CareerProfileStack);
+const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
