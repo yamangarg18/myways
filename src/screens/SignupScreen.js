@@ -1,90 +1,125 @@
-import React from 'react';
-import { View, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-elements';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { View, StyleSheet, TextInput, Image, TouchableOpacity, Text } from 'react-native';
 import Spacer from '../components/Spacer';
 import { Ionicons, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import NavLink from '../components/NavLink';
+import { useRegisterForm } from "../util/hooks";
+import { startSignUp, verifyOtp, setUserType } from "../actions/auth";
+import axios from "axios";
 
-const SignupScreen = ({ navigation }) => {
+const SignupScreen = ({ navigation, props }) => {
+    const [errors, setErrors] = useState({});
+    const [otp, setOtp] = useState("");
+    const [verified, setVerified] = useState(false);
+    const [userType, getUserType] = useState("student");
+    const [disabledButton, setButton] = useState(true);
+    const authError = useSelector(state => state.auth.error);
+    const dispatch = useDispatch();
+
+    const {
+        onChange,
+        onSubmit,
+        values,
+        error,
+        formError,
+        modal
+    } = useRegisterForm(startSignUp, userType, {
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
+        passcode: ""
+    });
+
+    console.log("props :- ", props);
+
     return (
         <View style={styles.container}>
-            <Image 
+            <Image
                 style={styles.logo}
                 source={require('../../assets/favicon.png')}
             />
-            <View  style={styles.background}>
-                <Ionicons 
+            <View style={styles.background}>
+                <Ionicons
                     name='md-person'
                     style={styles.icon}
                 />
-                <TextInput 
+                <TextInput
                     placeholder='Name'
-                    style={styles.input} 
+                    textContentType='password'
+                    style={styles.input}
+                    value={values.name}
+                    error={errors.name}
+                    onChange={onChange}
                 />
             </View>
-            <View  style={styles.background}>
-                <MaterialIcons 
+            <View style={styles.background}>
+                <MaterialIcons
                     name='email'
                     style={styles.icon}
                 />
-                <TextInput 
-                    placeholder='Email Address' 
+                <TextInput
+                    placeholder='Email Address'
                     style={styles.input}
                 />
             </View>
-            <View  style={styles.background}>
-                <Entypo 
-                    name='phone' 
+            <View style={styles.background}>
+                <Entypo
+                    name='phone'
                     style={styles.icon}
                 />
-                <TextInput 
-                    placeholder='Phone' 
+                <TextInput
+                    placeholder='Phone'
                     style={styles.input}
                 />
             </View>
-            <View  style={styles.background}>
-                <FontAwesome 
-                    name='lock' 
+            <View style={styles.background}>
+                <FontAwesome
+                    name='lock'
                     style={styles.icon}
                 />
-                <TextInput 
+                <TextInput
                     placeholder='Password'
                     style={styles.input}
                 />
             </View>
-            <View  style={styles.background}>
-                <FontAwesome 
-                    name='lock' 
+            <View style={styles.background}>
+                <FontAwesome
+                    name='lock'
                     style={styles.icon}
                 />
-                <TextInput 
-                    placeholder='Confirm Password' 
+                <TextInput
+                    placeholder='Confirm Password'
                     style={styles.input}
                 />
             </View>
             <Spacer>
-                <Text h4>If any:</Text>
+                <Text style={styles.text}>If any:</Text>
             </Spacer>
             <View style={styles.background}>
-                <FontAwesome 
-                    name='lock' 
+                <FontAwesome
+                    name='lock'
                     style={styles.icon}
                 />
-                <TextInput 
+                <TextInput
                     placeholder='College Access ID'
-                    style={styles.input} 
+                    style={styles.input}
                 />
             </View>
             <Spacer>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation.navigate('mainFlow')}
+                    onPress={() => {
+                        console.log("formError :- ", formError)
+                        navigation.navigate('mainFlow')
+                    }}
                 >
-                    <Text 
+                    <Text
                         style={styles.buttonText}
-                        size={30}
                     >
-                        Register as a Student
+                        Register/
                     </Text>
                 </TouchableOpacity>
             </Spacer>
@@ -107,8 +142,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#6a8d7b'
-    }, 
+        // backgroundColor: '#6a8d7b'
+    },
     logo: {
         alignSelf: 'center',
         width: 125,
@@ -116,10 +151,14 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     background: {
-        backgroundColor: '#F0EEEE',
-        height: 30,
+        // backgroundColor: '#F0EEEE',
+        // justifyContent: "space-between",
+        paddingHorizontal: 2,
+        height: 40,
         width: 300,
-        borderRadius: 15,
+        borderColor: 'grey',
+        borderWidth: 1,
+        borderRadius: 5,
         marginHorizontal: 15,
         flexDirection: 'row',
         alignItems: 'center',
@@ -129,6 +168,7 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         fontSize: 18,
+        // alignItems: 'center'
     },
     icon: {
         fontSize: 25,
@@ -139,6 +179,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'yellow',
         borderRadius: 25,
         alignItems: 'center',
+        justifyContent: 'center',
         height: 50,
         width: 150,
         padding: 13,
@@ -146,6 +187,13 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#2f4f4f',
+        fontWeight: 'bold',
+        fontSize: 20
+
+    },
+    text: {
+        fontSize: 20,
+        fontWeight: 'bold'
     }
 });
 

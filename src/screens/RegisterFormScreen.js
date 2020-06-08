@@ -3,10 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { View, StyleSheet, TextInput, Image, TouchableOpacity, Text } from 'react-native';
 import { useRegisterForm } from "../util/hooks";
 import { startSignUp, verifyOtp, setUserType } from "../actions/auth";
+import { useForm } from 'react-hook-form';
+import Spacer from '../components/Spacer';
+import { Ionicons, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import NavLink from '../components/NavLink';
 import axios from "axios";
 
 const Register = (props) => {
-    const [errors, setErrors] = useState({});
+    // const [errors, setErrors] = useState({});
     const [otp, setOtp] = useState("");
     const [verified, setVerified] = useState(false);
     const [userType, getUserType] = useState("student");
@@ -14,23 +18,27 @@ const Register = (props) => {
     const authError = useSelector(state => state.auth.error);
     const dispatch = useDispatch();
 
-    const {
-        onChange,
-        onSubmit,
-        values,
-        error,
-        formError,
-        modal
-    } = useRegisterForm(startSignUp, userType, {
-        name: "",
-        email: "",
-        phone: "",
-        password: "",
-        confirmPassword: "",
-        passcode: ""
-    });
+    const { register, handleSubmit, errors } = useForm();
+    const onSubmit = data => console.log(data);
+    console.log(errors);
 
-    console.log("props :- ", props);
+    // const {
+    //     onChange,
+    //     onSubmit,
+    //     values,
+    //     error,
+    //     formError,
+    //     modal
+    // } = useRegisterForm(startSignUp, userType, {
+    //     name: "",
+    //     email: "",
+    //     phone: "",
+    //     password: "",
+    //     confirmPassword: "",
+    //     passcode: ""
+    // });
+
+    // console.log("props :- ", props);
 
     // const onVerify = () => {
     //     console.log("inside verify");
@@ -70,6 +78,7 @@ const Register = (props) => {
                 style={styles.logo}
                 source={require('../../assets/favicon.png')}
             />
+
         </View>
     )
 }
@@ -127,3 +136,4 @@ const styles = StyleSheet.create({
 });
 
 export default Register;
+

@@ -16,7 +16,7 @@ import { store } from "./src/store/store";
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
-    Signup: Register,
+    Signup: SignupScreen,
     Signin: SigninScreen,
   }),
   mainFlow: Stack,
