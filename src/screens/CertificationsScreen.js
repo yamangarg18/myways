@@ -2,6 +2,7 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, Button } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
+import AddCertificationScreen from "./AddCertificationScreen";
 
 const CertificationsScreen = ({ navigation }) => {
   return (
@@ -11,7 +12,7 @@ const CertificationsScreen = ({ navigation }) => {
       <Text style={styles.text}>
         Empty Fields don't look good. Consider adding something?
       </Text>
-      <Button title='Add' onPress={() => navigation.navigate("CP1")} />
+      <Button title='Add' onPress={() => navigation.navigate("AddCertifications")} />
       <Button
         title='Continue'
         onPress={() => navigation.navigate("Portfolios")}
@@ -21,25 +22,27 @@ const CertificationsScreen = ({ navigation }) => {
   );
 };
 
-// const UserProfileStack = createStackNavigator(
-//   {
-//     UserProfile: UserProfileScreen,
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       title: "User Profile",
-//       headerLeft: () => <BackButton />,
-//       headerStyle: {
-//         backgroundColor: "darkslategrey",
-//       },
-//       headerTitleStyle: {
-//         fontWeight: "bold",
-//         color: "yellow",
-//       },
-//       headerTitleAlign: "center",
-//     },
-//   }
-// );
+const CertificationsStack = createStackNavigator(
+  {
+    Cert: CertificationsScreen,
+    AddCertifications: AddCertificationScreen
+
+  },
+  {
+    defaultNavigationOptions: {
+      title: "User Profile",
+      headerLeft: () => <BackButton />,
+      headerStyle: {
+        backgroundColor: "darkslategrey",
+      },
+      headerTitleStyle: {
+        fontWeight: "bold",
+        color: "yellow",
+      },
+      headerTitleAlign: "center",
+    },
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
