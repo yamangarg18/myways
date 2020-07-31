@@ -9,9 +9,9 @@ import Stack from "./src/components/Drawer";
 import CareerProfileStack from "./src/screens/CareerProfileScreen";
 import UserProfileStack from "./src/screens/UserProfileScreen";
 import EnterSkillsScreen from "./src/screens/EnterSkillsScreen";
-// import { Provider } from "./src/context/EducationContext";
+import { Provider } from "./src/context/EducationContext";
 import CP4Stack from "./src/screens/CP4Screen";
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./src/store/store";
 
 const switchNavigator = createSwitchNavigator({
@@ -26,8 +26,10 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <Provider store={store}>
-      <App />
+    <Provider>
+      <ReduxProvider store={store}>
+        <App />
+      </ReduxProvider>
     </Provider>
   );
 };

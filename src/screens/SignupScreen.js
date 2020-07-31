@@ -48,11 +48,7 @@ const SignupScreen = ({ navigation, props }) => {
                 />
                 <TextInput
                     placeholder='Name'
-                    textContentType='password'
                     style={styles.input}
-                    value={values.name}
-                    error={errors.name}
-                    onChange={onChange}
                 />
             </View>
             <View style={styles.background}>

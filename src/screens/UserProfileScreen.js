@@ -22,8 +22,146 @@ import EditEducationScreen from "./EditEducationScreen";
 
 const UserProfileScreen = ({ navigation }) => {
   const { state } = useContext(Context);
+  // const [step, setStep] = useState(1);
+
+  // useEffect(() => {
+  //   const getStudentData = () => {
+  //     let {
+  //       experiences: [],
+  //       education: [],
+  //       skills: {
+  //         present: [],
+  //         aspirational_skills: [],
+  //       },
+  //       courses: [],
+  //       projects: [],
+  //       profileLinks,
+  //       achievement,
+  //       availability,
+  //       location,
+  //     }
+  //     profileLinks =
+  //       profileLinks === undefined
+  //         ? {
+  //           github: "",
+  //           linkedin: "",
+  //           portfolio: "",
+  //           other: "",
+  //         }
+  //         : profileLinks;
+  //     setFormData({
+  //       education,
+  //       skills,
+  //       experiences,
+  //       projects,
+  //       courses,
+  //       profileLinks,
+  //       achievement,
+  //       availability,
+  //       location,
+  //     });
+  //   };
+
+  //   getStudentData();
+  // }, []);
+
+  // const nextStep = () => {
+  //   setStep(step + 1);
+  // };
+
+  // const prevStep = () => {
+  //   if (step - 1 <= 0) navigation.navigate("dashboard");
+  //   else setStep(step - 1);
+  // };
+
+  // const currentForm = () => {
+  //   switch (step) {
+  //     case 1:
+  //       return (
+  //         <StudentInfo
+  //           formData={formData}
+  //           setFormData={setFormData}
+  //           nextStep={nextStep}
+  //           prevStep={prevStep}
+  //           error={error}
+  //         />
+  //       );
+  //     // case 2:
+  //     //   return (
+  //     //     <StudentSkills
+  //     //       formData={formData}
+  //     //       setFormData={setFormData}
+  //     //       nextStep={nextStep}
+  //     //       prevStep={prevStep}
+  //     //       error={error}
+  //     //     />
+  //     //   );
+  //     // case 3:
+  //     //   return (
+  //     //     <StudentExperience
+  //     //       formData={formData}
+  //     //       setFormData={setFormData}
+  //     //       nextStep={nextStep}
+  //     //       prevStep={prevStep}
+  //     //       error={error}
+  //     //     />
+  //     //   );
+  //     // case 4:
+  //     //   return (
+  //     //     <StudentProject
+  //     //       formData={formData}
+  //     //       setFormData={setFormData}
+  //     //       nextStep={nextStep}
+  //     //       prevStep={prevStep}
+  //     //       error={error}
+  //     //     />
+  //     //   );
+  //     // case 5:
+  //     //   return (
+  //     //     <Courses
+  //     //       formData={formData}
+  //     //       setFormData={setFormData}
+  //     //       nextStep={nextStep}
+  //     //       prevStep={prevStep}
+  //     //       error={error}
+  //     //     />
+  //     //   );
+  //     // case 6:
+  //     //   return (
+  //     //     <Achievement
+  //     //       formData={formData}
+  //     //       setFormData={setFormData}
+  //     //       nextStep={nextStep}
+  //     //       prevStep={prevStep}
+  //     //       error={error}
+  //     //     />
+  //     //   );
+  //     // case 7:
+  //     //   return (
+  //     //     <StudentProfile
+  //     //       formData={formData}
+  //     //       setFormData={setFormData}
+  //     //       nextStep={nextStep}
+  //     //       prevStep={prevStep}
+  //     //       error={error}
+  //     //     />
+  //     //   );
+  //     // case 8:
+  //     //   return (
+  //     //     <StudentAvailability
+  //     //       formData={formData}
+  //     //       setFormData={setFormData}
+  //     //       nextStep={nextStep}
+  //     //       prevStep={prevStep}
+  //     //     />
+  //     //   );
+  //     default:
+  //       return null;
+  //   }
+  // };
 
   return (
+    // currentForm()
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/favicon.png")} />
       <Text style={styles.text}>User Profile</Text>

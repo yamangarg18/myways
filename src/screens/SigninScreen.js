@@ -37,7 +37,6 @@ const SigninScreen = ({ navigation }) => {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        console.log("formError :- ", formError)
                         navigation.navigate('mainFlow')
                     }}
                 >
