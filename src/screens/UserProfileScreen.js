@@ -77,7 +77,6 @@ const UserProfileStack = createStackNavigator(
     Experiences: ExperiencesScreen,
     Projects: ProjectsScreen,
     Certifications: CertificationsScreen,
-    AddCertifications: AddCertificationScreen,
     Portfolios: PortfoliosScreen,
   },
   {
