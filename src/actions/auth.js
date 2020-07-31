@@ -1,5 +1,5 @@
 import axios from "axios";
-import { history } from "../routers/AppRouter";
+// import { history } from "../routers/AppRouter";
 import {
   LOGIN,
   LOGOUT,
